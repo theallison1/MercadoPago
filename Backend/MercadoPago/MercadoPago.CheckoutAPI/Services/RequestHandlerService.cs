@@ -2,7 +2,6 @@
 using MercadoPago.CheckoutAPI.Interfaces;
 using MercadoPago.CheckoutAPI.Models.Response;
 using System.Net;
-using System.Text.Json;
 
 namespace MercadoPago.CheckoutAPI.Services
 {
@@ -54,7 +53,7 @@ namespace MercadoPago.CheckoutAPI.Services
                 try
                 {
                     _logger.LogInformation("{TimeStamp} (Intento Nro {Attempts}): {BaseAddress}{RequestUri}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), attempts, _httpClient.BaseAddress, request.RequestUri);
-                    response.Data = await _httpClient.SendAsync(request);
+                    response.Data = await _httpClient.SendAsync(await request.CloneAsync());
                     response.Content = await response.Data.GetContentAsync(_logger);
                     _logger.LogInformation("{TimeStamp} (Intento Nro {Attempts}): {RequestUri}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), attempts, request.RequestUri);
 
@@ -75,13 +74,13 @@ namespace MercadoPago.CheckoutAPI.Services
                 }
                 catch (Exception ex)
                 {
+                    _logger.LogError("{TimeStamp} (Intento Nro {Attempts}) ERROR: {Exception}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), attempts, ex);
                     if (attempts < maxRetries)
                     {
                         await Task.Delay(delayMilliseconds);
                     }
                     else
                     {
-                        _logger.LogError("{TimeStamp} (Intento Nro {Attempts}) ERROR: {Exception}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), attempts, ex);
                         response.Message = ex.Message;
                     }
                 }

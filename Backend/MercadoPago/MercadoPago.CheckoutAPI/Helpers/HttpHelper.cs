@@ -59,5 +59,45 @@ namespace MercadoPago.CheckoutAPI.Helpers
                 return null;
             }
         }
+
+        public static async Task<HttpRequestMessage> CloneAsync(this HttpRequestMessage request)
+        {
+            var clone = new HttpRequestMessage(request.Method, request.RequestUri)
+            {
+                Content = request.Content is not null ? await request.Content.CloneAsync().ConfigureAwait(false) : null,
+                Version = request.Version
+            };
+
+            foreach (var header in request.Headers)
+            {
+                clone.Headers.TryAddWithoutValidation(header.Key, header.Value);
+            }
+
+            return clone;
+        }
+
+        private static async Task<HttpContent> CloneAsync(this HttpContent content)
+        {
+            if (content is null) 
+                return null!;
+
+            var memoryStream = new MemoryStream();
+            await content.CopyToAsync(memoryStream).ConfigureAwait(false);
+            memoryStream.Position = 0;
+
+            HttpContent clone = content switch
+            {
+                StringContent => new StringContent(await content.ReadAsStringAsync().ConfigureAwait(false)),
+                ByteArrayContent => new ByteArrayContent(await content.ReadAsByteArrayAsync().ConfigureAwait(false)),
+                _ => new StreamContent(memoryStream)
+            };
+
+            foreach (var header in content.Headers)
+            {
+                clone.Headers.TryAddWithoutValidation(header.Key, header.Value);
+            }
+
+            return clone;
+        }
     }
 }
