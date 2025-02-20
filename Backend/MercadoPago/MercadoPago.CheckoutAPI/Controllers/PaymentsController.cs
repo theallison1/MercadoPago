@@ -17,9 +17,9 @@ namespace MercadoPago.CheckoutAPI.Controllers
         }
 
         [HttpGet("Search")]
-        public async Task<IActionResult> GetPayments([FromQuery] GetPaymentsRequestFilters filters)
+        public async Task<IActionResult> SearchPayments([FromQuery] SearchPaymentsRequestFilters filters)
         {
-            var response = await _paymentsService.GetPayments(filters);
+            var response = await _paymentsService.SearchPayments(filters);
 
             return response.ReturnStatusCode(this);
         }

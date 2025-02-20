@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace MercadoPago.CheckoutAPI.Models.Request
 {
     // Reference: https://www.mercadopago.com.ar/developers/es/reference/payments/_payments_search/get
 
-    public class GetPaymentsRequestFilters
+    public class SearchPaymentsRequestFilters
     {
         [JsonPropertyName("sort")]
         public string? Sort { get; set; } 

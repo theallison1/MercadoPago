@@ -22,6 +22,7 @@ builder.Services.AddHttpClient("MercadoPagoHttpClient", client =>
 
 builder.Services.AddScoped<IRequestHandlerService, RequestHandlerService>();
 builder.Services.AddScoped<IPaymentsService, PaymentsService>();
+builder.Services.AddScoped<ICustomersService, CustomersService>();
 
 builder.Services.AddControllers();
 
@@ -30,7 +31,6 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

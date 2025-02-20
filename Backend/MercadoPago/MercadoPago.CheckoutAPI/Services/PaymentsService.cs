@@ -14,7 +14,7 @@ namespace MercadoPago.CheckoutAPI.Services
             _requestHandlerService = requestHandlerService;
         }
 
-        public async Task<BaseResponse> GetPayments(GetPaymentsRequestFilters filters)
+        public async Task<BaseResponse> SearchPayments(SearchPaymentsRequestFilters filters)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"payments/search{filters.SetQuery()}");
 
@@ -22,6 +22,7 @@ namespace MercadoPago.CheckoutAPI.Services
        
             return response;
         }
+
         public async Task<BaseResponse> GetPaymentById(int paymentId)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"payments/{paymentId}");
