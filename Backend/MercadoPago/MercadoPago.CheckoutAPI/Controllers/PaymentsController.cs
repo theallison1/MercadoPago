@@ -1,5 +1,6 @@
 ﻿using MercadoPago.CheckoutAPI.Helpers;
 using MercadoPago.CheckoutAPI.Interfaces;
+using MercadoPago.CheckoutAPI.Models.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MercadoPago.CheckoutAPI.Controllers
@@ -15,6 +16,14 @@ namespace MercadoPago.CheckoutAPI.Controllers
             _paymentsService = paymentsService;
         }
 
+        [HttpGet("Search")]
+        public async Task<IActionResult> GetPayments([FromQuery] GetPaymentsRequestFilters filters)
+        {
+            var response = await _paymentsService.GetPayments(filters);
+
+            return response.ReturnStatusCode(this);
+        }
+
         [HttpGet("{paymentId:int}")]
         public async Task<IActionResult> GetPaymentById(int paymentId)
         {
@@ -23,12 +32,5 @@ namespace MercadoPago.CheckoutAPI.Controllers
             return response.ReturnStatusCode(this);
         }
 
-        [HttpGet("Search={externalReference}")]
-        public async Task<IActionResult> GetPaymentByExternalReference(string externalReference)
-        {
-            var response = await _paymentsService.GetPaymentByExternalReference(externalReference);
-
-            return response.ReturnStatusCode(this);
-        }
     }
 }

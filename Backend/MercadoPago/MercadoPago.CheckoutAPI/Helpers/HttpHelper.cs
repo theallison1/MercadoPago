@@ -1,7 +1,10 @@
 ﻿using MercadoPago.CheckoutAPI.Models.Response;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Reflection;
+using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace MercadoPago.CheckoutAPI.Helpers
 {
@@ -98,6 +101,39 @@ namespace MercadoPago.CheckoutAPI.Helpers
             }
 
             return clone;
+        }
+
+        public static string SetQuery<T>(this T filters)
+        {
+            StringBuilder query = new StringBuilder().Append("");
+
+            if (filters is null)
+                return query.ToString();
+            
+            var properties = typeof(T).GetProperties();
+
+            foreach (var property in properties)
+            {
+                var value = property.GetValue(filters); 
+                if (value is not null) 
+                {
+                    var name = property.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name ?? property.Name;
+
+                    if (query.Length > 0)
+                    {
+                        query.Append("&");
+                    }
+
+                    query.Append($"{name}={Uri.EscapeDataString(value.ToString())}"); 
+                }
+            }
+
+            if (query.Length > 0) 
+            { 
+                query.Insert(0, "?");
+            }
+
+            return query.ToString();
         }
     }
 }

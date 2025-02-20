@@ -324,3 +324,6 @@ reports/
 # src/environments/environment.ts
 # src/environments/environment.uat.ts
 # src/environments/environment.prod.ts
+
+appsettings.json
+appsettings.Development.json

@@ -6,7 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 var configuration = builder.Configuration;
 
-// Add services to the container.
 builder.Services.AddHttpClient("MercadoPagoHttpClient", client =>
 {
     var baseUrl = configuration["MercadoPago:UrlBase"];
@@ -25,7 +24,7 @@ builder.Services.AddScoped<IRequestHandlerService, RequestHandlerService>();
 builder.Services.AddScoped<IPaymentsService, PaymentsService>();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
