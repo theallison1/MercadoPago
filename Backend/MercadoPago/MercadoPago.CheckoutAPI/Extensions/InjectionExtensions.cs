@@ -10,6 +10,7 @@ namespace MercadoPago.CheckoutAPI.Extensions
             services.AddScoped<IRequestHandlerService, RequestHandlerService>();
             services.AddScoped<IPaymentsService, PaymentsService>();
             services.AddScoped<ICustomersService, CustomersService>();
+            services.AddScoped<IPaymentMethodsService, PaymentMethodsService>();
 
             return services;
         }
