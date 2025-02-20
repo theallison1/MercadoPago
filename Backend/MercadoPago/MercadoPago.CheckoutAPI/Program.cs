@@ -1,5 +1,4 @@
-using MercadoPago.CheckoutAPI.Interfaces;
-using MercadoPago.CheckoutAPI.Services;
+using MercadoPago.CheckoutAPI.Extensions;
 using System.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,9 +19,7 @@ builder.Services.AddHttpClient("MercadoPagoHttpClient", client =>
     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 });
 
-builder.Services.AddScoped<IRequestHandlerService, RequestHandlerService>();
-builder.Services.AddScoped<IPaymentsService, PaymentsService>();
-builder.Services.AddScoped<ICustomersService, CustomersService>();
+builder.Services.AddInjectionExtensions();
 
 builder.Services.AddControllers();
 

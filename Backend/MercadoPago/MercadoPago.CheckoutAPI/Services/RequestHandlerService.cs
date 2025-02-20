@@ -1,6 +1,6 @@
 ﻿using MercadoPago.CheckoutAPI.Helpers;
 using MercadoPago.CheckoutAPI.Interfaces;
-using MercadoPago.CheckoutAPI.Models.Response;
+using MercadoPago.CheckoutAPI.Models.Commons.Response;
 using System.Net;
 
 namespace MercadoPago.CheckoutAPI.Services

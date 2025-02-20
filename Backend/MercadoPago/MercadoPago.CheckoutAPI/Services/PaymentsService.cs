@@ -1,7 +1,7 @@
 ﻿using MercadoPago.CheckoutAPI.Helpers;
 using MercadoPago.CheckoutAPI.Interfaces;
-using MercadoPago.CheckoutAPI.Models.Request;
-using MercadoPago.CheckoutAPI.Models.Response;
+using MercadoPago.CheckoutAPI.Models.Commons.Response;
+using MercadoPago.CheckoutAPI.Models.Payments.Request;
 
 namespace MercadoPago.CheckoutAPI.Services
 {
@@ -18,7 +18,7 @@ namespace MercadoPago.CheckoutAPI.Services
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"payments/search{filters.SetQuery()}");
 
-            var response = await _requestHandlerService.SendAsync(request);
+            var response = await _requestHandlerService.SendWithRetryAsync(request);
        
             return response;
         }

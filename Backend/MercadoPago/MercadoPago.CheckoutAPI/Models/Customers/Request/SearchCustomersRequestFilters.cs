@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace MercadoPago.CheckoutAPI.Models.Request
+namespace MercadoPago.CheckoutAPI.Models.Customers.Request
 {
     // Reference: https://www.mercadopago.com.ar/developers/es/reference/customers/_customers_search/get
 

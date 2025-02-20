@@ -1,4 +1,4 @@
-﻿using MercadoPago.CheckoutAPI.Models.Response;
+﻿using MercadoPago.CheckoutAPI.Models.Commons.Response;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Reflection;
