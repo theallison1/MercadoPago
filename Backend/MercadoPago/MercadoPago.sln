@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34928.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MercadoPago.CheckoutAPI", "MercadoPago.CheckoutAPI\MercadoPago.CheckoutAPI.csproj", "{5479E2A3-FC3D-429D-B10B-A44BFA2FD76A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5479E2A3-FC3D-429D-B10B-A44BFA2FD76A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5479E2A3-FC3D-429D-B10B-A44BFA2FD76A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5479E2A3-FC3D-429D-B10B-A44BFA2FD76A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5479E2A3-FC3D-429D-B10B-A44BFA2FD76A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6A32BF58-78C0-47FC-9E63-5D5A4923C573}
+	EndGlobalSection
+EndGlobal
