@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 var builder = WebApplication.CreateBuilder(args);
 
 var configuration = builder.Configuration;
+var cors = "CORS";
 
 builder.Services.AddHttpClient("MercadoPagoHttpClient", client =>
 {
@@ -29,7 +30,20 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.Configure<MercadoPagoSettings>(builder.Configuration.GetSection("MercadoPago"));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(cors, policy => 
+    {
+        policy.WithOrigins("*");
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+    });
+    
+});
+
 var app = builder.Build();
+
+app.UseCors(cors);
 
 if (app.Environment.IsDevelopment())
 {

@@ -63,10 +63,10 @@ namespace MercadoPago.CheckoutAPI.Services
                 try
                 {
                     HttpRequestMessage attemptRequest = await request.CloneAsync();
-                    _logger.LogInformation("{TimeStamp} (Intento Nro {Attempts}): {BaseAddress}{RequestUri}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), attempts, _httpClient.BaseAddress, request.RequestUri);
+                    _logger.LogInformation("{TimeStamp} Inicio request: (Intento Nro {Attempts}): {BaseAddress}{RequestUri}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), attempts, _httpClient.BaseAddress, attemptRequest.RequestUri);
                     response.Data = await _httpClient.SendAsync(attemptRequest);
                     response.Content = await response.Data.GetContentAsync(_logger);
-                    _logger.LogInformation("{TimeStamp} (Intento Nro {Attempts}): {RequestUri}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), attempts, request.RequestUri);
+                    _logger.LogInformation("{TimeStamp} Fin request: (Intento Nro {Attempts}): {RequestUri}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), attempts, attemptRequest.RequestUri);
 
                     response.ValidateStatusCodeMessage();
                     if (response.Data.IsSuccessStatusCode)
