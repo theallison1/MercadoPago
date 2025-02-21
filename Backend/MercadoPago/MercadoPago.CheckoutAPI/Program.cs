@@ -1,4 +1,5 @@
 using MercadoPago.CheckoutAPI.Extensions;
+using MercadoPago.CheckoutAPI.Settings;
 using System.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.Configure<MercadoPagoSettings>(builder.Configuration.GetSection("MercadoPago"));
 
 var app = builder.Build();
 
