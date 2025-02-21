@@ -1,12 +1,13 @@
 ﻿using MercadoPago.CheckoutAPI.Models.Commons.Response;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace MercadoPago.CheckoutAPI.Helpers
+namespace MercadoPago.CheckoutAPI.HttpUtilities
 {
     public static class HttpHelper
     {
@@ -90,7 +91,7 @@ namespace MercadoPago.CheckoutAPI.Helpers
 
             HttpContent clone = content switch
             {
-                StringContent => new StringContent(await content.ReadAsStringAsync().ConfigureAwait(false)),
+                StringContent => new StringContent(await content.ReadAsStringAsync().ConfigureAwait(false), Encoding.UTF8, "application/json"),
                 ByteArrayContent => new ByteArrayContent(await content.ReadAsByteArrayAsync().ConfigureAwait(false)),
                 _ => new StreamContent(memoryStream)
             };
@@ -134,6 +135,13 @@ namespace MercadoPago.CheckoutAPI.Helpers
             }
 
             return query.ToString();
+        }
+
+        public static HttpRequestHeaders AddXIdempotencyKey(this HttpRequestHeaders headers)
+        {
+            headers.Add(HttpHeaders.X_IDEMPOTENCY_KEY, Guid.NewGuid().ToString());
+
+            return headers;
         }
     }
 }

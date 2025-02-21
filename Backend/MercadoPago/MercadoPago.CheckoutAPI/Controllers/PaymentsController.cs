@@ -1,4 +1,4 @@
-﻿using MercadoPago.CheckoutAPI.Helpers;
+﻿using MercadoPago.CheckoutAPI.HttpUtilities;
 using MercadoPago.CheckoutAPI.Interfaces;
 using MercadoPago.CheckoutAPI.Models.Payments.Request;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +28,14 @@ namespace MercadoPago.CheckoutAPI.Controllers
         public async Task<IActionResult> GetPaymentById(int paymentId)
         {
             var response = await _paymentsService.GetPaymentById(paymentId);
+
+            return response.ReturnStatusCode(this);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreatePayment([FromBody] CreatePaymentRequest bodyRequest)
+        {
+            var response = await _paymentsService.CreatePayment(bodyRequest);
 
             return response.ReturnStatusCode(this);
         }

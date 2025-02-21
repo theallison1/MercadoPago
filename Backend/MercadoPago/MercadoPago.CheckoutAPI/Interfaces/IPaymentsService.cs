@@ -7,5 +7,6 @@ namespace MercadoPago.CheckoutAPI.Interfaces
     {
         Task<BaseResponse> SearchPayments(SearchPaymentsRequestFilters filters);
         Task<BaseResponse> GetPaymentById(int paymentId);
+        Task<BaseResponse> CreatePayment(CreatePaymentRequest bodyRequest);
     }
 }

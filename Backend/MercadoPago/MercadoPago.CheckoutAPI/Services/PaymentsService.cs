@@ -1,7 +1,9 @@
-﻿using MercadoPago.CheckoutAPI.Helpers;
+﻿using MercadoPago.CheckoutAPI.HttpUtilities;
 using MercadoPago.CheckoutAPI.Interfaces;
 using MercadoPago.CheckoutAPI.Models.Commons.Response;
 using MercadoPago.CheckoutAPI.Models.Payments.Request;
+using System.Text;
+using System.Text.Json;
 
 namespace MercadoPago.CheckoutAPI.Services
 {
@@ -18,7 +20,7 @@ namespace MercadoPago.CheckoutAPI.Services
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"payments/search{filters.SetQuery()}");
 
-            var response = await _requestHandlerService.SendWithRetryAsync(request);
+            var response = await _requestHandlerService.SendAsync(request);
        
             return response;
         }
@@ -28,6 +30,18 @@ namespace MercadoPago.CheckoutAPI.Services
             var request = new HttpRequestMessage(HttpMethod.Get, $"payments/{paymentId}");
 
             var response = await _requestHandlerService.SendAsync(request);
+
+            return response;
+        }
+
+        public async Task<BaseResponse> CreatePayment(CreatePaymentRequest bodyRequest)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Post, $"payments");
+
+            request.Headers.AddXIdempotencyKey();
+            request.Content = new StringContent(JsonSerializer.Serialize(bodyRequest), Encoding.UTF8, "application/json"); ;
+
+            var response = await _requestHandlerService.SendWithRetryAsync(request);
 
             return response;
         }

@@ -1,4 +1,4 @@
-﻿using MercadoPago.CheckoutAPI.Helpers;
+﻿using MercadoPago.CheckoutAPI.HttpUtilities;
 using MercadoPago.CheckoutAPI.Interfaces;
 using MercadoPago.CheckoutAPI.Models.Commons.Response;
 using MercadoPago.CheckoutAPI.Models.Customers.Request;

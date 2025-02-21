@@ -1,7 +1,6 @@
-﻿using MercadoPago.CheckoutAPI.Helpers;
+﻿using MercadoPago.CheckoutAPI.HttpUtilities;
 using MercadoPago.CheckoutAPI.Interfaces;
 using MercadoPago.CheckoutAPI.Models.Customers.Request;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MercadoPago.CheckoutAPI.Controllers

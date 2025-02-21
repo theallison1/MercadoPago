@@ -1,10 +1,11 @@
-﻿using System.Text.Json.Serialization;
+﻿using MercadoPago.CheckoutAPI.Models.Commons.Request;
+using System.Text.Json.Serialization;
 
 namespace MercadoPago.CheckoutAPI.Models.Payments.Request
 {
     // Reference: https://www.mercadopago.com.ar/developers/es/reference/payments/_payments_search/get
 
-    public class SearchPaymentsRequestFilters
+    public class SearchPaymentsRequestFilters : SearchRequestFilters
     {
         [JsonPropertyName("sort")]
         public string? Sort { get; set; }
