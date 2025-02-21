@@ -1,4 +1,5 @@
 ﻿using MercadoPago.CheckoutAPI.Models.Commons.Response;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Net.Http.Headers;
@@ -142,6 +143,13 @@ namespace MercadoPago.CheckoutAPI.HttpUtilities
             headers.Add(HttpHeaders.X_IDEMPOTENCY_KEY, Guid.NewGuid().ToString());
 
             return headers;
+        }
+
+        public static HttpRequestMessage AddJsonBody<T>(this HttpRequestMessage request, T bodyRequest)
+        {
+            request.Content = new StringContent(JsonSerializer.Serialize(bodyRequest), Encoding.UTF8, "application/json");
+
+            return request;
         }
     }
 }

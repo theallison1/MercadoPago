@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using MercadoPago.CheckoutAPI.Models.Commons.Request;
+using System.Text.Json.Serialization;
 
 namespace MercadoPago.CheckoutAPI.Models.Payments.Request
 {
@@ -61,180 +62,12 @@ namespace MercadoPago.CheckoutAPI.Models.Payments.Request
         public string? CouponCode { get; set; }
 
         [JsonPropertyName("metadata")]
-        public object? Metadata { get; set; }  
+        public IDictionary<string, object>? Metadata { get; set; }  
 
         [JsonPropertyName("payer")]
         public PaymentPayer? Payer { get; set; }
 
         [JsonPropertyName("additional_info")]
         public PaymentAdditionalInfo? AdditionalInfo { get; set; }
-    }
-
-    public class PaymentPayer
-    {
-        [JsonPropertyName("entity_type")]
-        public string? EntityType { get; set; }
-
-        [JsonPropertyName("type")]
-        public string? Type { get; set; }
-
-        [JsonPropertyName("id")]
-        public int? Id { get; set; }
-
-        [JsonPropertyName("first_name")]
-        public string? FirstName { get; set; }
-
-        [JsonPropertyName("last_name")]
-        public string? LastName { get; set; }
-
-        [JsonPropertyName("email")]
-        public string? Email { get; set; }
-
-        [JsonPropertyName("identification")]
-        public PaymentPayerIdentification? Identification { get; set; }
-    }
-
-    public class PaymentPayerIdentification
-    {
-        [JsonPropertyName("type")]
-        public string? Type { get; set; }
-
-        [JsonPropertyName("number")]
-        public string? Number { get; set; }
-    }
-
-    public class PaymentAdditionalInfo
-    {
-        [JsonPropertyName("ip_address")]
-        public string? IpAddress { get; set; }
-
-        [JsonPropertyName("items")]
-        public PaymentAdditionalInfoItem[]? Items { get; set; }
-
-        [JsonPropertyName("payer")]
-        public PaymentAdditionalInfoPayer? Payer { get; set; }
-    }
-
-    public class PaymentAdditionalInfoPayer
-    {
-        [JsonPropertyName("first_name")]
-        public string? FirstName { get; set; }
-
-        [JsonPropertyName("last_name")]
-        public string? LastName { get; set; }
-
-        [JsonPropertyName("phone")]
-        public PaymentAdditionalInfoPayerPhone? Phone { get; set; }
-
-        [JsonPropertyName("address")]
-        public PaymentAdditionalInfoPayerAddress? Address { get; set; }
-
-        [JsonPropertyName("registration_date")]
-        public string? RegistrationDate { get; set; }
-
-        [JsonPropertyName("is_prime_user")]
-        public string? IsPrimeUser { get; set; }
-
-        [JsonPropertyName("is_first_purchase_online")]
-        public string? IsFirstPurchaseOnline { get; set; }
-
-        [JsonPropertyName("last_purchase")]
-        public string? LastPurchase { get; set; }
-
-        [JsonPropertyName("authentication_type")]
-        public string? AuthenticationType { get; set; }
-    }
-
-    public class PaymentAdditionalInfoPayerPhone
-    {
-        [JsonPropertyName("area_code")]
-        public string? AreaCode { get; set; }
-
-        [JsonPropertyName("number")]
-        public string? Number { get; set; }
-    }
-
-    public class PaymentAdditionalInfoPayerAddress
-    {
-        [JsonPropertyName("zip_code")]
-        public string? ZipCode { get; set; }
-
-        [JsonPropertyName("street_name")]
-        public string? StreetName { get; set; }
-
-        [JsonPropertyName("street_number")]
-        public string? StreetNumber { get; set; }
-    }
-
-    public class PaymentAdditionalInfoItem
-    {
-        [JsonPropertyName("id")]
-        public string? Id { get; set; }
-
-        [JsonPropertyName("title")]
-        public string? Title { get; set; }
-
-        [JsonPropertyName("description")]
-        public string? Description { get; set; }
-
-        [JsonPropertyName("picture_url")]
-        public string? PictureUrl { get; set; }
-
-        [JsonPropertyName("category_id")]
-        public string? CategoryId { get; set; }
-
-        [JsonPropertyName("quantity")]
-        public int? Quantity { get; set; }
-
-        [JsonPropertyName("unit_price")]
-        public float? UnitPrice { get; set; }
-
-        [JsonPropertyName("type")]
-        public string? Type { get; set; }
-
-        [JsonPropertyName("event_date")]
-        public string? EventDate { get; set; }
-
-        [JsonPropertyName("warranty")]
-        public bool? Warranty { get; set; }
-
-        [JsonPropertyName("category_descriptor")]
-        public ItemCategoryDescriptor? CategoryDescriptor { get; set; }
-    }
-
-    public class ItemCategoryDescriptor
-    {
-        [JsonPropertyName("passenger")]
-        public ItemCategoryDescriptorPassenger? Passenger { get; set; }
-
-        [JsonPropertyName("route")]
-        public ItemCategoryDescriptorRoute? Route { get; set; }
-    }
-
-    public class ItemCategoryDescriptorPassenger
-    {
-        [JsonPropertyName("first_name")]
-        public string? FirstName { get; set; }
-
-        [JsonPropertyName("last_name")]
-        public string? LastName { get; set; }
-    }
-
-    public class ItemCategoryDescriptorRoute
-    {
-        [JsonPropertyName("departure")]
-        public string? Departure { get; set; }
-
-        [JsonPropertyName("destination")]
-        public string? Destination { get; set; }
-
-        [JsonPropertyName("departure_date_time")]
-        public string? DepartureDateTime { get; set; }
-
-        [JsonPropertyName("arrival_date_time")]
-        public string? ArrivalDateTime { get; set; }
-
-        [JsonPropertyName("company")]
-        public string? Company { get; set; }
     }
 }

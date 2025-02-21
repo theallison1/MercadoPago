@@ -2,8 +2,6 @@
 using MercadoPago.CheckoutAPI.Interfaces;
 using MercadoPago.CheckoutAPI.Models.Commons.Response;
 using MercadoPago.CheckoutAPI.Models.Payments.Request;
-using System.Text;
-using System.Text.Json;
 
 namespace MercadoPago.CheckoutAPI.Services
 {
@@ -39,7 +37,7 @@ namespace MercadoPago.CheckoutAPI.Services
             var request = new HttpRequestMessage(HttpMethod.Post, $"payments");
 
             request.Headers.AddXIdempotencyKey();
-            request.Content = new StringContent(JsonSerializer.Serialize(bodyRequest), Encoding.UTF8, "application/json"); ;
+            request.AddJsonBody(bodyRequest);
 
             var response = await _requestHandlerService.SendWithRetryAsync(request);
 
