@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D16ABC86-C04
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D767F024-94EE-46E4-BA49-9B9943FBEE79}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MercadoPago.CheckoutAPI.Tests", "MercadoPago.CheckoutAPI.Tests\MercadoPago.CheckoutAPI.Tests.csproj", "{A70DC081-F9DB-49DD-946F-6DD99D51874B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,12 +21,17 @@ Global
 		{5479E2A3-FC3D-429D-B10B-A44BFA2FD76A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5479E2A3-FC3D-429D-B10B-A44BFA2FD76A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5479E2A3-FC3D-429D-B10B-A44BFA2FD76A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A70DC081-F9DB-49DD-946F-6DD99D51874B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A70DC081-F9DB-49DD-946F-6DD99D51874B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A70DC081-F9DB-49DD-946F-6DD99D51874B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A70DC081-F9DB-49DD-946F-6DD99D51874B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5479E2A3-FC3D-429D-B10B-A44BFA2FD76A} = {D16ABC86-C048-42EA-8432-0915AF5AA9FD}
+		{A70DC081-F9DB-49DD-946F-6DD99D51874B} = {D767F024-94EE-46E4-BA49-9B9943FBEE79}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6A32BF58-78C0-47FC-9E63-5D5A4923C573}
