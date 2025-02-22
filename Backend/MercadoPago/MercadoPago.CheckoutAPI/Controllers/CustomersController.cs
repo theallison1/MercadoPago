@@ -9,17 +9,17 @@ namespace MercadoPago.CheckoutAPI.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        private readonly ICustomersService _customersService;
+        private readonly ICustomersApplication _customersApplication;
 
-        public CustomersController(ICustomersService customersService)
+        public CustomersController(ICustomersApplication customersApplication)
         {
-            _customersService = customersService;
+            _customersApplication = customersApplication;
         }
 
         [HttpGet("Search")]
         public async Task<IActionResult> SearchCustomers([FromQuery] SearchCustomersRequestFilters filters) 
         {
-            var response = await _customersService.SearchCustomers(filters);
+            var response = await _customersApplication.SearchCustomers(filters);
 
             return response.ReturnStatusCode(this);
         }
@@ -28,7 +28,7 @@ namespace MercadoPago.CheckoutAPI.Controllers
         [HttpGet("{customerId}")]
         public async Task<IActionResult> GetCustomerById(string customerId) 
         {
-            var response = await _customersService.GetCustomerById(customerId);
+            var response = await _customersApplication.GetCustomerById(customerId);
 
             return response.ReturnStatusCode(this);
         }
@@ -36,7 +36,7 @@ namespace MercadoPago.CheckoutAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequest bodyRequest)
         {
-            var response = await _customersService.CreateCustomer(bodyRequest);
+            var response = await _customersApplication.CreateCustomer(bodyRequest);
 
             return response.ReturnStatusCode(this);
         }
@@ -44,7 +44,7 @@ namespace MercadoPago.CheckoutAPI.Controllers
         [HttpPut("{customerId}")]
         public async Task<IActionResult> UpdateCustomer(string customerId, [FromBody] UpdateCustomerRequest bodyRequest)
         {
-            var response = await _customersService.UpdateCustomer(customerId, bodyRequest);
+            var response = await _customersApplication.UpdateCustomer(customerId, bodyRequest);
 
             return response.ReturnStatusCode(this);
         }

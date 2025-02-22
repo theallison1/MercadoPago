@@ -3,7 +3,7 @@ using MercadoPago.CheckoutAPI.Application.Models.CustomerCards.Request;
 
 namespace MercadoPago.CheckoutAPI.Application.Interfaces
 {
-    public interface ICustomerCardsService
+    public interface ICustomerCardsApplication
     {
         Task<BaseResponse> GetCustomerCards(string customerId);
         Task<BaseResponse> GetCustomerCardById(string customerId, string cardId);

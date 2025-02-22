@@ -3,7 +3,7 @@ using MercadoPago.CheckoutAPI.Application.Models.Users.Request;
 
 namespace MercadoPago.CheckoutAPI.Application.Interfaces
 {
-    public interface IUsersService
+    public interface IUsersApplication
     {
         Task<BaseResponse> GetMyUser();
         Task<BaseResponse> CreateTestUser(CreateTestUserRequest bodyRequest);

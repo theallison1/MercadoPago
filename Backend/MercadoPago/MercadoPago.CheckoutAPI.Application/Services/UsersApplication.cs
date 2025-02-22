@@ -5,17 +5,17 @@ using MercadoPago.CheckoutAPI.Application.Serialization;
 
 namespace MercadoPago.CheckoutAPI.Application.Services
 {
-    public class UsersService : IUsersService
+    public class UsersApplication : IUsersApplication
     {
-        private readonly IRequestHandlerService _requestHandlerService;
+        private readonly IHttpClientManagerApplication _httpClientManagerApplication;
         private readonly ISerializer _serializer;
 
-        public UsersService(IRequestHandlerService requestHandlerService, ISerializer serializer)
+        public UsersApplication(IHttpClientManagerApplication httpClientManagerApplication, ISerializer serializer)
         {
-            _requestHandlerService = requestHandlerService;
+            _httpClientManagerApplication = httpClientManagerApplication;
             _serializer = serializer;
 
-            _requestHandlerService.RemoveVersionUrlBase();
+            _httpClientManagerApplication.RemoveVersionUrlBase();
         }
 
 
@@ -23,7 +23,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "users/me");
 
-            var response = await _requestHandlerService.SendAsync(request);
+            var response = await _httpClientManagerApplication.SendAsync(request);
 
             return response;
         }
@@ -34,7 +34,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
 
             _serializer.AddJsonBodyToContent(request, bodyRequest);
 
-            var response = await _requestHandlerService.SendWithRetryAsync(request);
+            var response = await _httpClientManagerApplication.SendWithRetryAsync(request);
 
             return response;
         }

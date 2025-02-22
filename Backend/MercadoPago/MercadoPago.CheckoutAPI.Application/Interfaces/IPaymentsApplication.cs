@@ -3,7 +3,7 @@ using MercadoPago.CheckoutAPI.Application.Models.Payments.Request;
 
 namespace MercadoPago.CheckoutAPI.Application.Interfaces
 {
-    public interface IPaymentsService
+    public interface IPaymentsApplication
     {
         Task<BaseResponse> SearchPayments(SearchPaymentsRequestFilters filters);
         Task<BaseResponse> GetPaymentById(int paymentId);

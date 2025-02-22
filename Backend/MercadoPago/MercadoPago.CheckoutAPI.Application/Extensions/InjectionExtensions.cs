@@ -9,12 +9,12 @@ namespace MercadoPago.CheckoutAPI.Application.Extensions
     {
         public static IServiceCollection AddInjectionApplication(this IServiceCollection services)
         {
-            services.AddScoped<IRequestHandlerService, RequestHandlerService>();
-            services.AddScoped<ICustomerCardsService, CustomerCardsService>();
-            services.AddScoped<ICustomersService, CustomersService>();
-            services.AddScoped<IPaymentMethodsService, PaymentMethodsService>();
-            services.AddScoped<IPaymentsService, PaymentsService>();
-            services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<IHttpClientManagerApplication, HttpClientManagerApplication>();
+            services.AddScoped<ICustomerCardsApplication, CustomerCardsApplication>();
+            services.AddScoped<ICustomersApplication, CustomersApplication>();
+            services.AddScoped<IPaymentMethodsApplication, PaymentMethodsApplication>();
+            services.AddScoped<IPaymentsApplication, PaymentsApplication>();
+            services.AddScoped<IUsersApplication, UsersApplication>();
             services.AddScoped<ISerializer, Serializer>();
 
             return services;

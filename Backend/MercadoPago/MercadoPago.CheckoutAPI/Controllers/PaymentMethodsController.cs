@@ -9,17 +9,17 @@ namespace MercadoPago.CheckoutAPI.Controllers
     [ApiController]
     public class PaymentMethodsController : ControllerBase
     {
-        private readonly IPaymentMethodsService _paymentMethodsService;
+        private readonly IPaymentMethodsApplication _paymentMethodsApplication;
 
-        public PaymentMethodsController(IPaymentMethodsService paymentMethodsService)
+        public PaymentMethodsController(IPaymentMethodsApplication paymentMethodsApplication)
         {
-            _paymentMethodsService = paymentMethodsService;
+            _paymentMethodsApplication = paymentMethodsApplication;
         }
 
         [HttpGet("Search")]
         public async Task<IActionResult> SearchPaymentMethods([FromQuery] SearchPaymentMethodsRequestFilters filters)
         {
-            var response = await _paymentMethodsService.SearchPaymentMethods(filters);
+            var response = await _paymentMethodsApplication.SearchPaymentMethods(filters);
 
             return response.ReturnStatusCode(this);
         }
@@ -27,7 +27,7 @@ namespace MercadoPago.CheckoutAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetPaymentMethods()
         {
-            var response = await _paymentMethodsService.GetPaymentMethods();
+            var response = await _paymentMethodsApplication.GetPaymentMethods();
 
             return response.ReturnStatusCode(this);
         }

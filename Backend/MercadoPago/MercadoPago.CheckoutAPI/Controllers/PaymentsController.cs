@@ -9,17 +9,17 @@ namespace MercadoPago.CheckoutAPI.Controllers
     [ApiController]
     public class PaymentsController : ControllerBase
     {
-        public readonly IPaymentsService _paymentsService;
+        public readonly IPaymentsApplication _paymentsApplication;
 
-        public PaymentsController(IPaymentsService paymentsService)
+        public PaymentsController(IPaymentsApplication paymentsApplication)
         {
-            _paymentsService = paymentsService;
+            _paymentsApplication = paymentsApplication;
         }
 
         [HttpGet("Search")]
         public async Task<IActionResult> SearchPayments([FromQuery] SearchPaymentsRequestFilters filters)
         {
-            var response = await _paymentsService.SearchPayments(filters);
+            var response = await _paymentsApplication.SearchPayments(filters);
 
             return response.ReturnStatusCode(this);
         }
@@ -27,7 +27,7 @@ namespace MercadoPago.CheckoutAPI.Controllers
         [HttpGet("{paymentId:int}")]
         public async Task<IActionResult> GetPaymentById(int paymentId)
         {
-            var response = await _paymentsService.GetPaymentById(paymentId);
+            var response = await _paymentsApplication.GetPaymentById(paymentId);
 
             return response.ReturnStatusCode(this);
         }
@@ -35,7 +35,7 @@ namespace MercadoPago.CheckoutAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreatePayment([FromBody] CreatePaymentRequest bodyRequest)
         {
-            var response = await _paymentsService.CreatePayment(bodyRequest);
+            var response = await _paymentsApplication.CreatePayment(bodyRequest);
 
             return response.ReturnStatusCode(this);
         }
@@ -43,7 +43,7 @@ namespace MercadoPago.CheckoutAPI.Controllers
         [HttpPut("{paymentId:int}")]
         public async Task<IActionResult> UpdatePayment(int paymentId, [FromBody] UpdatePaymentRequest bodyRequest)
         {
-            var response = await _paymentsService.UpdatePayment(paymentId, bodyRequest);
+            var response = await _paymentsApplication.UpdatePayment(paymentId, bodyRequest);
 
             return response.ReturnStatusCode(this);
         }

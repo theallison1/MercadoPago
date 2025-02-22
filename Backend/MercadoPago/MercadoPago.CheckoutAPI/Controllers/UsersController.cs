@@ -9,17 +9,17 @@ namespace MercadoPago.CheckoutAPI.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IUsersService _usersService;
+        private readonly IUsersApplication _usersApplication;
 
-        public UsersController(IUsersService usersService)
+        public UsersController(IUsersApplication usersApplication)
         {
-            _usersService = usersService;
+            _usersApplication = usersApplication;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetMyUser()
         {
-            var response = await _usersService.GetMyUser();
+            var response = await _usersApplication.GetMyUser();
             
             return response.ReturnStatusCode(this);
         }
@@ -27,7 +27,7 @@ namespace MercadoPago.CheckoutAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateTestUser([FromBody] CreateTestUserRequest bodyRequest)
         {
-            var response = await _usersService.CreateTestUser(bodyRequest);
+            var response = await _usersApplication.CreateTestUser(bodyRequest);
 
             return response.ReturnStatusCode(this);
         }
