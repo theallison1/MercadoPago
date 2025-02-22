@@ -13,15 +13,21 @@ namespace MercadoPago.CheckoutAPI.Application.Serialization
     public class Serializer : ISerializer
     {
         private readonly ILogger<Serializer> _logger;
+        private readonly JsonSerializerOptions _jsonSerializerOptions;
 
         public Serializer(ILogger<Serializer> logger)
         {
             _logger = logger;
+            _jsonSerializerOptions = new JsonSerializerOptions() 
+            { 
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+                WriteIndented = true
+            };
         }
 
         public HttpRequestMessage AddJsonBodyToContent<T>(HttpRequestMessage request, T bodyRequest)
         {
-            request.Content = new StringContent(JsonSerializer.Serialize(bodyRequest), Encoding.UTF8, "application/json");
+            request.Content = new StringContent(JsonSerializer.Serialize(bodyRequest, _jsonSerializerOptions), Encoding.UTF8, "application/json");
 
             return request;
         }

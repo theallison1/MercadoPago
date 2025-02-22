@@ -40,5 +40,13 @@ namespace MercadoPago.CheckoutAPI.Controllers
             return response.ReturnStatusCode(this);
         }
 
+        [HttpPut("{paymentId:int}")]
+        public async Task<IActionResult> UpdatePayment(int paymentId, [FromBody] UpdatePaymentRequest bodyRequest)
+        {
+            var response = await _paymentsService.UpdatePayment(paymentId, bodyRequest);
+
+            return response.ReturnStatusCode(this);
+        }
+
     }
 }

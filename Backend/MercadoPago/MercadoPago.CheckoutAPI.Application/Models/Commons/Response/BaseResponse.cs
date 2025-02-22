@@ -7,6 +7,8 @@ namespace MercadoPago.CheckoutAPI.Application.Models.Commons.Response
         [JsonIgnore]
         public HttpResponseMessage? Data { get; set; }
         public object? Content { get; set; }
+        public int? StatusCode { get; set; }
+        public string? Method { get; set; }
         public string? Message { get; set; }
     }
 }

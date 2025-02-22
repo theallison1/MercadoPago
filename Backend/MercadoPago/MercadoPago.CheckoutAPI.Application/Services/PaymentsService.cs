@@ -46,5 +46,16 @@ namespace MercadoPago.CheckoutAPI.Application.Services
 
             return response;
         }
+
+        public async Task<BaseResponse> UpdatePayment(int paymentId, UpdatePaymentRequest bodyRequest)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Put, $"payments/{paymentId}");
+
+            _serializer.AddJsonBodyToContent(request, bodyRequest);
+
+            var response = await _requestHandlerService.SendWithRetryAsync(request);
+
+            return response;
+        }
     }
 }

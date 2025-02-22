@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace MercadoPago.CheckoutAPI.Application.Models.Commons.Request
+namespace MercadoPago.CheckoutAPI.Application.Models.Commons
 {
     public class Phone
     {

@@ -1,5 +1,4 @@
-﻿using MercadoPago.CheckoutAPI.Application.Models.Commons.Request;
-using MercadoPago.CheckoutAPI.Application.Models.Customers;
+﻿using MercadoPago.CheckoutAPI.Application.Models.Commons;
 using System.Text.Json.Serialization;
 
 namespace MercadoPago.CheckoutAPI.Application.Models.Customers.Request

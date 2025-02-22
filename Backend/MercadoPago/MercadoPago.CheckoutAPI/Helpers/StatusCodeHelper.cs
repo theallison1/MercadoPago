@@ -17,11 +17,16 @@ namespace MercadoPago.CheckoutAPI.Helpers
 
             var statusCode = response.Data.StatusCode;
 
+            response.StatusCode = (int)statusCode;
+            response.Method = response.Data.RequestMessage.Method.Method;
+            
             response.Message = statusCode switch
             {
                 HttpStatusCode.BadRequest => "Solicitud incorrecta. Verifique los parámetros y vuelva a intentarlo.",
                 HttpStatusCode.Unauthorized => "Acceso no autorizado",
+                HttpStatusCode.Forbidden => "No tiene permisos para acceder al recurso solicitado",
                 HttpStatusCode.NotFound => "No se encontraron datos",
+                HttpStatusCode.MethodNotAllowed => $"Método no permitido: {response.Method}",
                 >= HttpStatusCode.RequestTimeout => "Ha ocurrido un error, intente mas tarde",
                 _ => "Respuesta exitosa"
             };
@@ -30,8 +35,9 @@ namespace MercadoPago.CheckoutAPI.Helpers
             {
                 HttpStatusCode.BadRequest => controller.BadRequest(response),
                 HttpStatusCode.Unauthorized => controller.Unauthorized(response),
+                HttpStatusCode.Forbidden => controller.StatusCode(403, response),
                 HttpStatusCode.NotFound => controller.NotFound(response),
-                >= HttpStatusCode.RequestTimeout => controller.StatusCode((int)statusCode, response),
+                >= HttpStatusCode.MethodNotAllowed => controller.StatusCode((int)statusCode, response),
                 _ => controller.Ok(response)
             };
         }

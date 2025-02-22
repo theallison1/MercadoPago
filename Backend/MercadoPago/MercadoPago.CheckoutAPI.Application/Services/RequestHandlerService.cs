@@ -14,7 +14,6 @@ namespace MercadoPago.CheckoutAPI.Application.Services
         private readonly HttpClient _httpClient;
         private readonly ISerializer _serializer;
         private readonly ILogger<RequestHandlerService> _logger;
-        private readonly IOptions<MercadoPagoSettings> _options;
         private readonly int _maxRetries;
         private readonly int _retryDelayMilliseconds;
 
@@ -23,7 +22,6 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             _httpClient = httpClientFactory.CreateClient("MercadoPagoHttpClient");
             _serializer = serializer;
             _logger = logger;
-            _options = options;
             _maxRetries = Convert.ToInt32(options.Value.MaxRetriesHTTP);
             _retryDelayMilliseconds = Convert.ToInt32(options.Value.RetryDelayMilliseconds);
         }
