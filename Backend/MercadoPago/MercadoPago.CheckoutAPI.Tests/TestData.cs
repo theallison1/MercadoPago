@@ -12,13 +12,13 @@ namespace MercadoPago.CheckoutAPI.Tests
         public static readonly IList<TestCard> TestCards = new List<TestCard>
         {
             // Credit Cards
-            new TestCard("Mastercard", "5031755734530604", "123", "11/30)"),
-            new TestCard("Visa", "4509953566233704", "123", "11/30)"),
-            new TestCard("American Express", "371180303257522", "123", "11/30)"),
+            new TestCard("Mastercard", "5031755734530604", "123", "11/30"),
+            new TestCard("Visa", "4509953566233704", "123", "11/30"),
+            new TestCard("American Express", "371180303257522", "123", "11/30"),
 
             // Debit Cards
-            new TestCard("Mastercard", "5287338310253304", "123", "11/30)"),
-            new TestCard("Visa", "4002768694395619", "123", "11/30)")
+            new TestCard("Mastercard", "5287338310253304", "123", "11/30"),
+            new TestCard("Visa", "4002768694395619", "123", "11/30")
         };
 
         // Para probar diferentes resultados de pago hay que completar con uno de los siguientes valores en el campo "card_holder_name" al realizar el pago

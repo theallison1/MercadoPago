@@ -15,6 +15,7 @@ namespace MercadoPago.CheckoutAPI.Application.Extensions
             services.AddScoped<IPaymentMethodsApplication, PaymentMethodsApplication>();
             services.AddScoped<IPaymentsApplication, PaymentsApplication>();
             services.AddScoped<IUsersApplication, UsersApplication>();
+            services.AddScoped<ICardTokensApplication, CardTokensApplication>();
             services.AddScoped<ISerializer, Serializer>();
 
             return services;
