@@ -14,6 +14,8 @@ namespace MercadoPago.CheckoutAPI.Application.Services
         {
             _requestHandlerService = requestHandlerService;
             _serializer = serializer;
+
+            _requestHandlerService.RemoveVersionUrlBase();
         }
 
 
@@ -21,7 +23,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "users/me");
 
-            var response = await _requestHandlerService.SendAsync(request, false);
+            var response = await _requestHandlerService.SendAsync(request);
 
             return response;
         }
@@ -32,7 +34,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
 
             _serializer.AddJsonBodyToContent(request, bodyRequest);
 
-            var response = await _requestHandlerService.SendWithRetryAsync(request, false);
+            var response = await _requestHandlerService.SendWithRetryAsync(request);
 
             return response;
         }

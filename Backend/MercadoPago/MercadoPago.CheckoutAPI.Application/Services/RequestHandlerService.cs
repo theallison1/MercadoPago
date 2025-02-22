@@ -28,10 +28,8 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             _retryDelayMilliseconds = Convert.ToInt32(options.Value.RetryDelayMilliseconds);
         }
 
-        public async Task<BaseResponse> SendAsync(HttpRequestMessage request, bool apiVersioned = true)
+        public async Task<BaseResponse> SendAsync(HttpRequestMessage request)
         {
-            ValidateUrlBase(apiVersioned);
-
             BaseResponse? response = new BaseResponse();
 
             try
@@ -55,10 +53,8 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             return response;
         }
 
-        public async Task<BaseResponse> SendWithRetryAsync(HttpRequestMessage request, bool apiVersioned = true)
+        public async Task<BaseResponse> SendWithRetryAsync(HttpRequestMessage request)
         {
-            ValidateUrlBase(apiVersioned);
-
             int attempts = 0;
             BaseResponse? response = new BaseResponse();
 
@@ -104,12 +100,9 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             return response;
         }
 
-        public void ValidateUrlBase(bool apiVersioned)
+        public void RemoveVersionUrlBase()
         {
-            if (!apiVersioned)
-            {
-                _httpClient.BaseAddress = new Uri(_options.Value.UrlBase.ToString().Replace("/v1/", ""));
-            }
+            _httpClient.BaseAddress = new Uri(_httpClient.BaseAddress.ToString().Replace("/v1", ""));
         }
     }
 }
