@@ -18,18 +18,18 @@ namespace MercadoPago.CheckoutAPI.Application.Services
         private readonly int _maxRetries;
         private readonly int _retryDelayMilliseconds;
 
-        public HttpClientManagerApplication(IHttpClientFactory httpClientFactory, ISerializer serializer, ILogger<HttpClientManagerApplication> logger, IOptions<MercadoPagoSettings> options)
+        public HttpClientManagerApplication(IHttpClientFactory httpClientFactory, ISerializer serializer, ILogger<HttpClientManagerApplication> logger, IOptions<MercadoPagoSettings> mercadoPagoSettings)
         {
             _httpClient = httpClientFactory.CreateClient("MercadoPagoHttpClient");
             _serializer = serializer;
             _logger = logger;
-            _maxRetries = Convert.ToInt32(options.Value.MaxRetriesHTTP);
-            _retryDelayMilliseconds = Convert.ToInt32(options.Value.RetryDelayMilliseconds);
+            _maxRetries = Convert.ToInt32(mercadoPagoSettings.Value.MaxRetriesHTTP);
+            _retryDelayMilliseconds = Convert.ToInt32(mercadoPagoSettings.Value.RetryDelayMilliseconds);
         }
 
-        public async Task<BaseResponse> SendAsync(HttpRequestMessage request)
+        public async Task<BaseResponse<HttpResponseMessage>> SendAsync(HttpRequestMessage request)
         {
-            BaseResponse? response = new BaseResponse();
+            var response = new BaseResponse<HttpResponseMessage>();
 
             try
             {
@@ -52,10 +52,10 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             return response;
         }
 
-        public async Task<BaseResponse> SendWithRetryAsync(HttpRequestMessage request)
+        public async Task<BaseResponse<HttpResponseMessage>> SendWithRetryAsync(HttpRequestMessage request)
         {
             int attempts = 0;
-            BaseResponse? response = new BaseResponse();
+            var response = new BaseResponse<HttpResponseMessage>();
 
             while (attempts < _maxRetries)
             {

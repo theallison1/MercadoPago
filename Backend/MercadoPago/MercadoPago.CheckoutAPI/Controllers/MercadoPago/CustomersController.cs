@@ -1,11 +1,13 @@
 ﻿using MercadoPago.CheckoutAPI.Application.Interfaces;
 using MercadoPago.CheckoutAPI.Application.Models.Customers.Request;
 using MercadoPago.CheckoutAPI.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MercadoPago.CheckoutAPI.Controllers
+namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
 {
-    [Route("api/[controller]")]
+    [Authorize(Roles = "administrator")]
+    [Route("api/MercadoPago/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase
     {
@@ -17,7 +19,7 @@ namespace MercadoPago.CheckoutAPI.Controllers
         }
 
         [HttpGet("Search")]
-        public async Task<IActionResult> SearchCustomers([FromQuery] SearchCustomersRequestFilters filters) 
+        public async Task<IActionResult> SearchCustomers([FromQuery] SearchCustomersRequestFilters filters)
         {
             var response = await _customersApplication.SearchCustomers(filters);
 
@@ -26,7 +28,7 @@ namespace MercadoPago.CheckoutAPI.Controllers
 
 
         [HttpGet("{customerId}")]
-        public async Task<IActionResult> GetCustomerById(string customerId) 
+        public async Task<IActionResult> GetCustomerById(string customerId)
         {
             var response = await _customersApplication.GetCustomerById(customerId);
 
@@ -49,6 +51,6 @@ namespace MercadoPago.CheckoutAPI.Controllers
             return response.ReturnStatusCode(this);
         }
 
-        
+
     }
 }

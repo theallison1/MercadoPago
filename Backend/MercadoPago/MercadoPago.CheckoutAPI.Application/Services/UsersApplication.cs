@@ -19,7 +19,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
         }
 
 
-        public async Task<BaseResponse> GetMyUser()
+        public async Task<BaseResponse<HttpResponseMessage>> GetMyUser()
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "users/me");
 
@@ -28,7 +28,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             return response;
         }
 
-        public async Task<BaseResponse> CreateTestUser(CreateTestUserRequest bodyRequest)
+        public async Task<BaseResponse<HttpResponseMessage>> CreateTestUser(CreateTestUserRequest bodyRequest)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, "users/test");
 

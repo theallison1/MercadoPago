@@ -10,6 +10,6 @@ namespace MercadoPago.CheckoutAPI.Application.Interfaces
 {
     public interface IAuthApplication
     {
-        Task<BaseResponse> Login(TokenRequestDto bodyRequest);
+        Task<BaseResponse<string>> Login(TokenRequestDto bodyRequest);
     }
 }

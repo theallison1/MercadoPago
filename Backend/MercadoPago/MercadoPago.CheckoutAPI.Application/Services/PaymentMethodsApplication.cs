@@ -11,18 +11,18 @@ namespace MercadoPago.CheckoutAPI.Application.Services
     {
         private readonly IHttpClientManagerApplication _httpClientManagerApplication;
         private readonly ISerializer _serializer;
-        private readonly IOptions<MercadoPagoSettings> _options;
+        private readonly IOptions<MercadoPagoSettings> _mercadoPagoSettings;
 
-        public PaymentMethodsApplication(IHttpClientManagerApplication httpClientManagerApplication, ISerializer serializer, IOptions<MercadoPagoSettings> options)
+        public PaymentMethodsApplication(IHttpClientManagerApplication httpClientManagerApplication, ISerializer serializer, IOptions<MercadoPagoSettings> mercadoPagoSettings)
         {
             _httpClientManagerApplication = httpClientManagerApplication;
             _serializer = serializer;
-            _options = options;
+            _mercadoPagoSettings = mercadoPagoSettings;
         }
 
-        public async Task<BaseResponse> SearchPaymentMethods(SearchPaymentMethodsRequestFilters filters)
+        public async Task<BaseResponse<HttpResponseMessage>> SearchPaymentMethods(SearchPaymentMethodsRequestFilters filters)
         {
-            filters.PublicKey = _options.Value.PublicKey;
+            filters.PublicKey = _mercadoPagoSettings.Value.PublicKey;
             var request = new HttpRequestMessage(HttpMethod.Get, $"payment_methods/search{_serializer.SetQueryParams(filters)}");
 
             var response = await _httpClientManagerApplication.SendAsync(request);
@@ -30,7 +30,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             return response;
         }
 
-        public async Task<BaseResponse> GetPaymentMethods()
+        public async Task<BaseResponse<HttpResponseMessage>> GetPaymentMethods()
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "payment_methods");
 

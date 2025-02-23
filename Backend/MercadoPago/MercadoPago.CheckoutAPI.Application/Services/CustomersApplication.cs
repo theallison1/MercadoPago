@@ -16,7 +16,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             _serializer = serializer;
         }
 
-        public async Task<BaseResponse> SearchCustomers(SearchCustomersRequestFilters filters)
+        public async Task<BaseResponse<HttpResponseMessage>> SearchCustomers(SearchCustomersRequestFilters filters)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"customers/search{_serializer.SetQueryParams(filters)}");
 
@@ -25,7 +25,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             return response;
         }
 
-        public async Task<BaseResponse> GetCustomerById(string customerId)
+        public async Task<BaseResponse<HttpResponseMessage>> GetCustomerById(string customerId)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"customers/{customerId}");
 
@@ -34,7 +34,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             return response;
         }
 
-        public async Task<BaseResponse> CreateCustomer(CreateCustomerRequest bodyRequest)
+        public async Task<BaseResponse<HttpResponseMessage>> CreateCustomer(CreateCustomerRequest bodyRequest)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, $"customers");
 
@@ -45,7 +45,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             return response;
         }
 
-        public async Task<BaseResponse> UpdateCustomer(string customerId, UpdateCustomerRequest bodyRequest)
+        public async Task<BaseResponse<HttpResponseMessage>> UpdateCustomer(string customerId, UpdateCustomerRequest bodyRequest)
         {
             var request = new HttpRequestMessage(HttpMethod.Put, $"customers/{customerId}");
 

@@ -6,7 +6,7 @@ namespace MercadoPago.CheckoutAPI.Helpers
 {
     public static class StatusCodeHelper
     {
-        public static IActionResult ReturnStatusCode(this BaseResponse response, ControllerBase controller)
+        public static IActionResult ReturnStatusCode(this BaseResponse<HttpResponseMessage> response, ControllerBase controller)
         {
             if (response.Data is null)
             {

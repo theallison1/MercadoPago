@@ -9,6 +9,6 @@ namespace MercadoPago.CheckoutAPI.Infrastructure.Persistences.Interfaces
 {
     public interface IUsersRepository
     {
-        Task<Users> GetUserByEmail(string email);
+        Task<User> GetUserByEmail(string email);
     }
 }

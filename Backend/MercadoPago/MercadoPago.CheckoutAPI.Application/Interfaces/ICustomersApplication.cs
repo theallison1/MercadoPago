@@ -5,9 +5,9 @@ namespace MercadoPago.CheckoutAPI.Application.Interfaces
 {
     public interface ICustomersApplication
     {
-        Task<BaseResponse> SearchCustomers(SearchCustomersRequestFilters filters);
-        Task<BaseResponse> GetCustomerById(string customerId);
-        Task<BaseResponse> CreateCustomer(CreateCustomerRequest bodyRequest);
-        Task<BaseResponse> UpdateCustomer(string customerId, UpdateCustomerRequest bodyRequest);
+        Task<BaseResponse<HttpResponseMessage>> SearchCustomers(SearchCustomersRequestFilters filters);
+        Task<BaseResponse<HttpResponseMessage>> GetCustomerById(string customerId);
+        Task<BaseResponse<HttpResponseMessage>> CreateCustomer(CreateCustomerRequest bodyRequest);
+        Task<BaseResponse<HttpResponseMessage>> UpdateCustomer(string customerId, UpdateCustomerRequest bodyRequest);
     }
 }

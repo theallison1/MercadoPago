@@ -1,11 +1,12 @@
 ﻿using MercadoPago.CheckoutAPI.Application.Interfaces;
 using MercadoPago.CheckoutAPI.Application.Models.Payments.Request;
 using MercadoPago.CheckoutAPI.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MercadoPago.CheckoutAPI.Controllers
+namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
 {
-    [Route("api/[controller]")]
+    [Route("api/MercadoPago/[controller]")]
     [ApiController]
     public class PaymentsController : ControllerBase
     {
@@ -16,6 +17,7 @@ namespace MercadoPago.CheckoutAPI.Controllers
             _paymentsApplication = paymentsApplication;
         }
 
+        [Authorize(Roles = "administrator")]
         [HttpGet("Search")]
         public async Task<IActionResult> SearchPayments([FromQuery] SearchPaymentsRequestFilters filters)
         {
@@ -24,6 +26,7 @@ namespace MercadoPago.CheckoutAPI.Controllers
             return response.ReturnStatusCode(this);
         }
 
+        [Authorize(Roles = "administrator")]
         [HttpGet("{paymentId}")]
         public async Task<IActionResult> GetPaymentById(int paymentId)
         {
@@ -32,6 +35,8 @@ namespace MercadoPago.CheckoutAPI.Controllers
             return response.ReturnStatusCode(this);
         }
 
+
+        [Authorize(Roles = "administrator,customer")]
         [HttpPost]
         public async Task<IActionResult> CreatePayment([FromBody] CreatePaymentRequest bodyRequest)
         {
@@ -40,6 +45,7 @@ namespace MercadoPago.CheckoutAPI.Controllers
             return response.ReturnStatusCode(this);
         }
 
+        [Authorize(Roles = "administrator")]
         [HttpPut("{paymentId}")]
         public async Task<IActionResult> UpdatePayment(int paymentId, [FromBody] UpdatePaymentRequest bodyRequest)
         {

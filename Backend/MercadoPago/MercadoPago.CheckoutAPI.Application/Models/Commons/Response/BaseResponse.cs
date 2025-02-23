@@ -2,10 +2,10 @@
 
 namespace MercadoPago.CheckoutAPI.Application.Models.Commons.Response
 {
-    public class BaseResponse
+    public class BaseResponse<T>
     {
         [JsonIgnore]
-        public HttpResponseMessage? Data { get; set; }
+        public T? Data { get; set; }
         public object? Content { get; set; }
         public int? StatusCode { get; set; }
         public string? Method { get; set; }

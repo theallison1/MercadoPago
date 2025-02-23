@@ -5,7 +5,7 @@ namespace MercadoPago.CheckoutAPI.Application.Interfaces
 {
     public interface IPaymentMethodsApplication
     {
-        Task<BaseResponse> SearchPaymentMethods(SearchPaymentMethodsRequestFilters filters);
-        Task<BaseResponse> GetPaymentMethods();
+        Task<BaseResponse<HttpResponseMessage>> SearchPaymentMethods(SearchPaymentMethodsRequestFilters filters);
+        Task<BaseResponse<HttpResponseMessage>> GetPaymentMethods();
     }
 }

@@ -1,11 +1,6 @@
 ﻿using MercadoPago.CheckoutAPI.Domain.Entities;
 using MercadoPago.CheckoutAPI.Infrastructure.Persistences.Contexts;
 using MercadoPago.CheckoutAPI.Infrastructure.Persistences.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MercadoPago.CheckoutAPI.Infrastructure.Persistences.Repositories
 {
@@ -18,7 +13,7 @@ namespace MercadoPago.CheckoutAPI.Infrastructure.Persistences.Repositories
             _context = context;
         }
 
-        public async Task<Users?> GetUserByEmail(string email)
+        public async Task<User> GetUserByEmail(string email)
         {
             var user = _context.Users.FirstOrDefault(x => x.Email.Equals(email));
             

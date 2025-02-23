@@ -16,7 +16,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             _serializer = serializer;
         }
 
-        public async Task<BaseResponse> GetCustomerCards(string customerId)
+        public async Task<BaseResponse<HttpResponseMessage>> GetCustomerCards(string customerId)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"customers/{customerId}/cards");
 
@@ -25,7 +25,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             return response;
         }
 
-        public async Task<BaseResponse> GetCustomerCardById(string customerId, string cardId)
+        public async Task<BaseResponse<HttpResponseMessage>> GetCustomerCardById(string customerId, string cardId)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"customers/{customerId}/cards/{cardId}");
 
@@ -34,7 +34,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             return response;
         }
 
-        public async Task<BaseResponse> CreateCustomerCard(string customerId, CreateCustomerCardRequest bodyRequest)
+        public async Task<BaseResponse<HttpResponseMessage>> CreateCustomerCard(string customerId, CreateCustomerCardRequest bodyRequest)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, $"customers/{customerId}/cards");
 
@@ -45,7 +45,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             return response;
         }
 
-        public async Task<BaseResponse> UpdateCustomerCard(string customerId, string cardId, UpdateCustomerCardRequest bodyRequest)
+        public async Task<BaseResponse<HttpResponseMessage>> UpdateCustomerCard(string customerId, string cardId, UpdateCustomerCardRequest bodyRequest)
         {
             var request = new HttpRequestMessage(HttpMethod.Put, $"customers/{customerId}/cards/{cardId}");
 
@@ -56,7 +56,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             return response;
         }
 
-        public async Task<BaseResponse> DeleteCustomerCard(string customerId, string cardId)
+        public async Task<BaseResponse<HttpResponseMessage>> DeleteCustomerCard(string customerId, string cardId)
         {
             var request = new HttpRequestMessage(HttpMethod.Delete, $"customers/{customerId}/cards/{cardId}");
 

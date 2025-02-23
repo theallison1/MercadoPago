@@ -17,7 +17,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
         }
 
         // USAR ESTE SERVICIO SOLAMENTE PARA PRUEBAS, POR SEGURIDAD EL TOKEN DEBE GENERARSE EN EL FRONTEND APUNTANDO DIRECTAMENTE HACIA LA API DE MERCADO PAGO
-        public async Task<BaseResponse> CreateCardToken(CreateCardTokenRequest bodyRequest)
+        public async Task<BaseResponse<HttpResponseMessage>> CreateCardToken(CreateCardTokenRequest bodyRequest)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, "card_tokens");
 

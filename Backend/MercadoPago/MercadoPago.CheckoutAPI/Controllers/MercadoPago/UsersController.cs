@@ -1,11 +1,13 @@
 ﻿using MercadoPago.CheckoutAPI.Application.Interfaces;
 using MercadoPago.CheckoutAPI.Application.Models.Users.Request;
 using MercadoPago.CheckoutAPI.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MercadoPago.CheckoutAPI.Controllers
+namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
 {
-    [Route("api/[controller]")]
+    [Authorize(Roles = "administrator")]
+    [Route("api/MercadoPago/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -20,7 +22,7 @@ namespace MercadoPago.CheckoutAPI.Controllers
         public async Task<IActionResult> GetMyUser()
         {
             var response = await _usersApplication.GetMyUser();
-            
+
             return response.ReturnStatusCode(this);
         }
 

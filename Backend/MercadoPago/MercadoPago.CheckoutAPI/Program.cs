@@ -1,5 +1,6 @@
 using MercadoPago.CheckoutAPI.Application.Extensions;
 using MercadoPago.CheckoutAPI.Application.Settings;
+using MercadoPago.CheckoutAPI.Extensions;
 using MercadoPago.CheckoutAPI.Infrastructure.Extensions;
 using System.Net.Http.Headers;
 
@@ -24,12 +25,14 @@ builder.Services.AddHttpClient("MercadoPagoHttpClient", client =>
 
 builder.Services.AddInjectionInfrastructure();
 builder.Services.AddInjectionApplication();
+builder.Services.AddAuthentication(configuration);
 
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.Configure<MercadoPagoSettings>(builder.Configuration.GetSection("MercadoPago"));
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 
 builder.Services.AddCors(options =>
 {
@@ -47,6 +50,8 @@ var app = builder.Build();
 app.UseCors(cors);
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

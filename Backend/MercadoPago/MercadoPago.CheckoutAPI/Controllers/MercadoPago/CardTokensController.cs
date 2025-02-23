@@ -1,14 +1,16 @@
 ﻿using MercadoPago.CheckoutAPI.Application.Interfaces;
 using MercadoPago.CheckoutAPI.Application.Models.CardToken.Request;
 using MercadoPago.CheckoutAPI.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MercadoPago.CheckoutAPI.Controllers
+namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
 {
-    [Route("api/[controller]")]
+    [Authorize(Roles = "administrator")]
+    [Route("api/MercadoPago/[controller]")]
     [ApiController]
     public class CardTokensController : ControllerBase
-    {     
+    {
         private readonly ICardTokensApplication _cardTokensApplication;
 
         public CardTokensController(ICardTokensApplication cardTokensApplication)

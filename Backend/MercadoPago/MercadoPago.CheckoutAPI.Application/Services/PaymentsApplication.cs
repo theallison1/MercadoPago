@@ -16,7 +16,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             _serializer = serializer;
         }
 
-        public async Task<BaseResponse> SearchPayments(SearchPaymentsRequestFilters filters)
+        public async Task<BaseResponse<HttpResponseMessage>> SearchPayments(SearchPaymentsRequestFilters filters)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"payments/search{_serializer.SetQueryParams(filters)}");
 
@@ -25,7 +25,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             return response;
         }
 
-        public async Task<BaseResponse> GetPaymentById(int paymentId)
+        public async Task<BaseResponse<HttpResponseMessage>> GetPaymentById(int paymentId)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"payments/{paymentId}");
 
@@ -34,7 +34,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             return response;
         }
 
-        public async Task<BaseResponse> CreatePayment(CreatePaymentRequest bodyRequest)
+        public async Task<BaseResponse<HttpResponseMessage>> CreatePayment(CreatePaymentRequest bodyRequest)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, $"payments");
 
@@ -46,7 +46,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             return response;
         }
 
-        public async Task<BaseResponse> UpdatePayment(int paymentId, UpdatePaymentRequest bodyRequest)
+        public async Task<BaseResponse<HttpResponseMessage>> UpdatePayment(int paymentId, UpdatePaymentRequest bodyRequest)
         {
             var request = new HttpRequestMessage(HttpMethod.Put, $"payments/{paymentId}");
 
