@@ -26,7 +26,6 @@ builder.Services.AddInjectionApplication();
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 builder.Services.Configure<MercadoPagoSettings>(builder.Configuration.GetSection("MercadoPago"));
 
@@ -44,12 +43,6 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 app.UseCors(cors);
-
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
 app.UseHttpsRedirection();
 

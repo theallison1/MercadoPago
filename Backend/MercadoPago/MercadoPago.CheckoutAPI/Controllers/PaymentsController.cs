@@ -24,7 +24,7 @@ namespace MercadoPago.CheckoutAPI.Controllers
             return response.ReturnStatusCode(this);
         }
 
-        [HttpGet("{paymentId:int}")]
+        [HttpGet("{paymentId}")]
         public async Task<IActionResult> GetPaymentById(int paymentId)
         {
             var response = await _paymentsApplication.GetPaymentById(paymentId);
@@ -40,7 +40,7 @@ namespace MercadoPago.CheckoutAPI.Controllers
             return response.ReturnStatusCode(this);
         }
 
-        [HttpPut("{paymentId:int}")]
+        [HttpPut("{paymentId}")]
         public async Task<IActionResult> UpdatePayment(int paymentId, [FromBody] UpdatePaymentRequest bodyRequest)
         {
             var response = await _paymentsApplication.UpdatePayment(paymentId, bodyRequest);

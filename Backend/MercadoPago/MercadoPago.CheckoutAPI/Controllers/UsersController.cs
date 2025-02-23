@@ -16,7 +16,7 @@ namespace MercadoPago.CheckoutAPI.Controllers
             _usersApplication = usersApplication;
         }
 
-        [HttpGet]
+        [HttpGet("Me")]
         public async Task<IActionResult> GetMyUser()
         {
             var response = await _usersApplication.GetMyUser();
@@ -24,7 +24,7 @@ namespace MercadoPago.CheckoutAPI.Controllers
             return response.ReturnStatusCode(this);
         }
 
-        [HttpPost]
+        [HttpPost("Test")]
         public async Task<IActionResult> CreateTestUser([FromBody] CreateTestUserRequest bodyRequest)
         {
             var response = await _usersApplication.CreateTestUser(bodyRequest);

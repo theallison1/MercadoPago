@@ -8,7 +8,11 @@ namespace MercadoPago.CheckoutAPI.Application.Models.Customers
         [JsonPropertyName("id")]
         public string? Id { get; set; }
 
-        [JsonPropertyName("city")]
-        public City? City { get; set; }
+        [JsonPropertyName("street_number")]
+        public new Int64? StreetNumber
+        {
+            get => Int64.TryParse(base.StreetNumber, out Int64 number) ? number : null;
+            set => base.StreetNumber = value?.ToString();
+        }
     }
 }

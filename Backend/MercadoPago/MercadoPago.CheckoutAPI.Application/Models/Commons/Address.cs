@@ -11,6 +11,6 @@ namespace MercadoPago.CheckoutAPI.Application.Models.Commons
         public string? StreetName { get; set; }
 
         [JsonPropertyName("street_number")]
-        public object? StreetNumber { get; set; }
+        public string? StreetNumber { get; set; }
     }
 }

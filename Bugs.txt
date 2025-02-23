@@ -1,0 +1,1 @@
+- El endpoint de mercado https://api.mercadopago.com/v1/customers/(ID) no actualiza el "address", parece ser un error de ellos o la documentacion está mal.
