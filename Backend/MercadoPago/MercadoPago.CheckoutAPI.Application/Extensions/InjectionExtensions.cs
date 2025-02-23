@@ -10,6 +10,7 @@ namespace MercadoPago.CheckoutAPI.Application.Extensions
         public static IServiceCollection AddInjectionApplication(this IServiceCollection services)
         {
             services.AddScoped<IHttpClientManagerApplication, HttpClientManagerApplication>();
+            services.AddScoped<IAuthApplication, AuthApplication>();
             services.AddScoped<ICustomerCardsApplication, CustomerCardsApplication>();
             services.AddScoped<ICustomersApplication, CustomersApplication>();
             services.AddScoped<IPaymentMethodsApplication, PaymentMethodsApplication>();

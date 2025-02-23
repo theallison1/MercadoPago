@@ -1,5 +1,6 @@
 using MercadoPago.CheckoutAPI.Application.Extensions;
 using MercadoPago.CheckoutAPI.Application.Settings;
+using MercadoPago.CheckoutAPI.Infrastructure.Extensions;
 using System.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,7 @@ builder.Services.AddHttpClient("MercadoPagoHttpClient", client =>
     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 });
 
+builder.Services.AddInjectionInfrastructure();
 builder.Services.AddInjectionApplication();
 
 builder.Services.AddControllers();
