@@ -1,6 +1,6 @@
-﻿using MercadoPago.CheckoutAPI.Application.Interfaces;
+﻿using MercadoPago.CheckoutAPI.Application.Dtos.Commons.Response;
+using MercadoPago.CheckoutAPI.Application.Interfaces;
 using MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago;
-using MercadoPago.CheckoutAPI.Application.Models.Commons.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,11 +18,11 @@ namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
             _httpClientManagerApplication = httpClientManagerApplication;
         }
 
-        public async Task<BaseResponse<HttpResponseMessage>> GetIdentificationTypes()
+        public async Task<BaseResponse<T>> GetIdentificationTypes<T>()
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "identification_types");
 
-            var response = await _httpClientManagerApplication.SendAsync(request);
+            var response = await _httpClientManagerApplication.SendAsync<T>(request);
 
             return response;
         }

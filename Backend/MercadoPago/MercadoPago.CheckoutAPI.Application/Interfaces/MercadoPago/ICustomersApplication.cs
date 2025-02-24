@@ -1,13 +1,13 @@
-﻿using MercadoPago.CheckoutAPI.Application.Models.Commons.Response;
-using MercadoPago.CheckoutAPI.Application.Models.Customers.Request;
+﻿using MercadoPago.CheckoutAPI.Application.Dtos.Commons.Response;
+using MercadoPago.CheckoutAPI.Application.Models.MercadoPago.Customers.Request;
 
 namespace MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago
 {
     public interface ICustomersApplication
     {
-        Task<BaseResponse<HttpResponseMessage>> SearchCustomers(SearchCustomersRequestFilters filters);
-        Task<BaseResponse<HttpResponseMessage>> GetCustomerById(string customerId);
-        Task<BaseResponse<HttpResponseMessage>> CreateCustomer(CreateCustomerRequest bodyRequest);
-        Task<BaseResponse<HttpResponseMessage>> UpdateCustomer(string customerId, UpdateCustomerRequest bodyRequest);
+        Task<BaseResponse<T>> SearchCustomers<T>(SearchCustomersRequestFilters filters);
+        Task<BaseResponse<T>> GetCustomerById<T>(string customerId);
+        Task<BaseResponse<T>> CreateCustomer<T>(CreateCustomerRequest bodyRequest);
+        Task<BaseResponse<T>> UpdateCustomer<T>(string customerId, UpdateCustomerRequest bodyRequest);
     }
 }

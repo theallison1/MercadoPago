@@ -1,5 +1,5 @@
 ﻿using MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago;
-using MercadoPago.CheckoutAPI.Application.Models.Users.Request;
+using MercadoPago.CheckoutAPI.Application.Models.MercadoPago.Users.Request;
 using MercadoPago.CheckoutAPI.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +21,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpGet("Me")]
         public async Task<IActionResult> GetMyUser()
         {
-            var response = await _usersApplication.GetMyUser();
+            var response = await _usersApplication.GetMyUser<object>();
 
             return response.ReturnStatusCode(this);
         }
@@ -30,7 +30,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpPost("Test")]
         public async Task<IActionResult> CreateTestUser([FromBody] CreateTestUserRequest bodyRequest)
         {
-            var response = await _usersApplication.CreateTestUser(bodyRequest);
+            var response = await _usersApplication.CreateTestUser<object>(bodyRequest);
 
             return response.ReturnStatusCode(this);
         }

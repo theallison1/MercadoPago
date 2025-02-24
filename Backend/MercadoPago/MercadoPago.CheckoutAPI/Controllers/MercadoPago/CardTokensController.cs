@@ -1,5 +1,5 @@
 ﻿using MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago;
-using MercadoPago.CheckoutAPI.Application.Models.CardToken.Request;
+using MercadoPago.CheckoutAPI.Application.Models.MercadoPago.CardToken.Request;
 using MercadoPago.CheckoutAPI.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

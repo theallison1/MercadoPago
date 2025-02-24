@@ -1,5 +1,5 @@
 ﻿using MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago;
-using MercadoPago.CheckoutAPI.Application.Models.Payments.Request;
+using MercadoPago.CheckoutAPI.Application.Models.MercadoPago.Payments.Request;
 using MercadoPago.CheckoutAPI.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +21,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpGet("Search")]
         public async Task<IActionResult> SearchPayments([FromQuery] SearchPaymentsRequestFilters filters)
         {
-            var response = await _paymentsApplication.SearchPayments(filters);
+            var response = await _paymentsApplication.SearchPayments<object>(filters);
 
             return response.ReturnStatusCode(this);
         }
@@ -30,7 +30,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpGet("{paymentId}")]
         public async Task<IActionResult> GetPaymentById(int paymentId)
         {
-            var response = await _paymentsApplication.GetPaymentById(paymentId);
+            var response = await _paymentsApplication.GetPaymentById<object>(paymentId);
 
             return response.ReturnStatusCode(this);
         }
@@ -40,7 +40,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpPost]
         public async Task<IActionResult> CreatePayment([FromBody] CreatePaymentRequest bodyRequest)
         {
-            var response = await _paymentsApplication.CreatePayment(bodyRequest);
+            var response = await _paymentsApplication.CreatePayment<object>(bodyRequest);
 
             return response.ReturnStatusCode(this);
         }
@@ -49,7 +49,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpPut("{paymentId}")]
         public async Task<IActionResult> UpdatePayment(int paymentId, [FromBody] UpdatePaymentRequest bodyRequest)
         {
-            var response = await _paymentsApplication.UpdatePayment(paymentId, bodyRequest);
+            var response = await _paymentsApplication.UpdatePayment<object>(paymentId, bodyRequest);
 
             return response.ReturnStatusCode(this);
         }

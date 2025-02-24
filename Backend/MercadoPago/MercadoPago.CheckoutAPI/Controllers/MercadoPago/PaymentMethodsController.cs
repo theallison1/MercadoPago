@@ -1,5 +1,5 @@
 ﻿using MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago;
-using MercadoPago.CheckoutAPI.Application.Models.PaymentMethods.Request;
+using MercadoPago.CheckoutAPI.Application.Models.MercadoPago.PaymentMethods.Request;
 using MercadoPago.CheckoutAPI.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +21,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpGet("Search")]
         public async Task<IActionResult> SearchPaymentMethods([FromQuery] SearchPaymentMethodsRequestFilters filters)
         {
-            var response = await _paymentMethodsApplication.SearchPaymentMethods(filters);
+            var response = await _paymentMethodsApplication.SearchPaymentMethods<object>(filters);
 
             return response.ReturnStatusCode(this);
         }
@@ -29,7 +29,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpGet]
         public async Task<IActionResult> GetPaymentMethods()
         {
-            var response = await _paymentMethodsApplication.GetPaymentMethods();
+            var response = await _paymentMethodsApplication.GetPaymentMethods<object>();
 
             return response.ReturnStatusCode(this);
         }

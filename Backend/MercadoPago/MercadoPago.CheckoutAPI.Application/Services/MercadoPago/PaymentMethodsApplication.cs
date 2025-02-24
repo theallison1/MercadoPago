@@ -1,7 +1,7 @@
-﻿using MercadoPago.CheckoutAPI.Application.Interfaces;
+﻿using MercadoPago.CheckoutAPI.Application.Dtos.Commons.Response;
+using MercadoPago.CheckoutAPI.Application.Interfaces;
 using MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago;
-using MercadoPago.CheckoutAPI.Application.Models.Commons.Response;
-using MercadoPago.CheckoutAPI.Application.Models.PaymentMethods.Request;
+using MercadoPago.CheckoutAPI.Application.Models.MercadoPago.PaymentMethods.Request;
 using MercadoPago.CheckoutAPI.Application.Serialization;
 using MercadoPago.CheckoutAPI.Application.Settings;
 using Microsoft.Extensions.Options;
@@ -21,21 +21,21 @@ namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
             _mercadoPagoSettings = mercadoPagoSettings;
         }
 
-        public async Task<BaseResponse<HttpResponseMessage>> SearchPaymentMethods(SearchPaymentMethodsRequestFilters filters)
+        public async Task<BaseResponse<T>> SearchPaymentMethods<T>(SearchPaymentMethodsRequestFilters filters)
         {
             filters.PublicKey = _mercadoPagoSettings.Value.PublicKey;
             var request = new HttpRequestMessage(HttpMethod.Get, $"payment_methods/search{_serializer.SetQueryParams(filters)}");
 
-            var response = await _httpClientManagerApplication.SendAsync(request);
+            var response = await _httpClientManagerApplication.SendAsync<T>(request);
 
             return response;
         }
 
-        public async Task<BaseResponse<HttpResponseMessage>> GetPaymentMethods()
+        public async Task<BaseResponse<T>> GetPaymentMethods<T>()
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "payment_methods");
 
-            var response = await _httpClientManagerApplication.SendAsync(request);
+            var response = await _httpClientManagerApplication.SendAsync<T>(request);
 
             return response;
         }

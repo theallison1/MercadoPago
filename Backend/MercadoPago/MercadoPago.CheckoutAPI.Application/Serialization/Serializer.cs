@@ -32,20 +32,20 @@ namespace MercadoPago.CheckoutAPI.Application.Serialization
             return request;
         }
 
-        public async Task<object?> DeserializeJsonAsync(HttpResponseMessage response)
+        public async Task<T> DeserializeJsonAsync<T>(HttpResponseMessage response)
         {
             if (response is null || response.Content is null)
-                return null;
+                return default;
 
             try
             {
-                using var jsonStream = await response.Content.ReadAsStreamAsync();
-                return await JsonSerializer.DeserializeAsync<object?>(jsonStream);
+                var jsonStream = await response.Content.ReadAsStreamAsync();
+                return await JsonSerializer.DeserializeAsync<T>(jsonStream);
             }
             catch (JsonException ex)
             {
                 _logger.LogError("Error de deserialización: {Exception}", ex);
-                return null;
+                return default;
             }
         }
 

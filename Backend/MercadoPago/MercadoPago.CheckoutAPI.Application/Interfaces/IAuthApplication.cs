@@ -1,5 +1,5 @@
-﻿using MercadoPago.CheckoutAPI.Application.Dtos.Users.Request;
-using MercadoPago.CheckoutAPI.Application.Models.Commons.Response;
+﻿using MercadoPago.CheckoutAPI.Application.Dtos.Commons.Response;
+using MercadoPago.CheckoutAPI.Application.Dtos.Users.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;

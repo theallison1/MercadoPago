@@ -1,11 +1,11 @@
-﻿using MercadoPago.CheckoutAPI.Application.Models.Commons.Response;
-using MercadoPago.CheckoutAPI.Application.Models.Users.Request;
+﻿using MercadoPago.CheckoutAPI.Application.Dtos.Commons.Response;
+using MercadoPago.CheckoutAPI.Application.Models.MercadoPago.Users.Request;
 
 namespace MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago
 {
     public interface IUsersApplication
     {
-        Task<BaseResponse<HttpResponseMessage>> GetMyUser();
-        Task<BaseResponse<HttpResponseMessage>> CreateTestUser(CreateTestUserRequest bodyRequest);
+        Task<BaseResponse<T>> GetMyUser<T>();
+        Task<BaseResponse<T>> CreateTestUser<T>(CreateTestUserRequest bodyRequest);
     }
 }

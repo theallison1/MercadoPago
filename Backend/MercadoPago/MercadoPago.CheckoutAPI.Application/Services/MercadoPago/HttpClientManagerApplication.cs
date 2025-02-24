@@ -1,5 +1,5 @@
-﻿using MercadoPago.CheckoutAPI.Application.Interfaces;
-using MercadoPago.CheckoutAPI.Application.Models.Commons.Response;
+﻿using MercadoPago.CheckoutAPI.Application.Dtos.Commons.Response;
+using MercadoPago.CheckoutAPI.Application.Interfaces;
 using MercadoPago.CheckoutAPI.Application.Serialization;
 using MercadoPago.CheckoutAPI.Application.Settings;
 using Microsoft.Extensions.Logging;
@@ -27,18 +27,23 @@ namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
             _retryDelayMilliseconds = Convert.ToInt32(mercadoPagoSettings.Value.RetryDelayMilliseconds);
         }
 
-        public async Task<BaseResponse<HttpResponseMessage>> SendAsync(HttpRequestMessage request)
+        public async Task<BaseResponse<T>> SendAsync<T>(HttpRequestMessage request)
         {
-            var response = new BaseResponse<HttpResponseMessage>();
+            var response = new BaseResponse<T>()
+            {
+                Method = request.Method.Method
+            };
 
             try
             {
                 _logger.LogInformation("{TimeStamp} IN Request: {BaseAddress}{RequestUri}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), _httpClient.BaseAddress, request.RequestUri);
-                response.Data = await _httpClient.SendAsync(request);
-                response.Content = await _serializer.DeserializeJsonAsync(response.Data);
+                HttpResponseMessage httpResponseMessage = await _httpClient.SendAsync(request);
                 _logger.LogInformation("{TimeStamp} OUT Request: {RequestUri}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), request.RequestUri);
 
-                if (response.Data.IsSuccessStatusCode)
+                response.Data = await _serializer.DeserializeJsonAsync<T>(httpResponseMessage);
+                response.StatusCode = (int)httpResponseMessage.StatusCode;
+
+                if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     return response;
                 }
@@ -52,10 +57,13 @@ namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
             return response;
         }
 
-        public async Task<BaseResponse<HttpResponseMessage>> SendWithRetryAsync(HttpRequestMessage request)
+        public async Task<BaseResponse<T>> SendWithRetryAsync<T>(HttpRequestMessage request)
         {
             int attempts = 0;
-            var response = new BaseResponse<HttpResponseMessage>();
+            var response = new BaseResponse<T>()
+            {
+                Method = request.Method.Method
+            };
 
             while (attempts < _maxRetries)
             {
@@ -64,16 +72,18 @@ namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
                 {
                     HttpRequestMessage attemptRequest = await CloneRequestAsync(request);
                     _logger.LogInformation("{TimeStamp} IN Request: (Intento Nro {Attempts}): {BaseAddress}{RequestUri}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), attempts, _httpClient.BaseAddress, attemptRequest.RequestUri);
-                    response.Data = await _httpClient.SendAsync(attemptRequest);
-                    response.Content = await _serializer.DeserializeJsonAsync(response.Data);
+                    HttpResponseMessage httpResponseMessage = await _httpClient.SendAsync(attemptRequest);
                     _logger.LogInformation("{TimeStamp} OUT Request: (Intento Nro {Attempts}): {RequestUri}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), attempts, attemptRequest.RequestUri);
 
-                    if (response.Data.IsSuccessStatusCode)
+                    response.Data = await _serializer.DeserializeJsonAsync<T>(httpResponseMessage);
+                    response.StatusCode = (int)httpResponseMessage.StatusCode;
+
+                    if (httpResponseMessage.IsSuccessStatusCode)
                     {
                         return response;
                     }
 
-                    if (response.Data.StatusCode == HttpStatusCode.RequestTimeout || (int)response.Data.StatusCode >= 500)
+                    if (httpResponseMessage.StatusCode == HttpStatusCode.RequestTimeout || (int)httpResponseMessage.StatusCode >= 500)
                     {
                         await Task.Delay(_retryDelayMilliseconds);
                     }

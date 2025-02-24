@@ -2,6 +2,8 @@ using MercadoPago.CheckoutAPI.Application.Extensions;
 using MercadoPago.CheckoutAPI.Application.Settings;
 using MercadoPago.CheckoutAPI.Extensions;
 using MercadoPago.CheckoutAPI.Infrastructure.Extensions;
+using MercadoPago.CheckoutAPI.Middlewares;
+using Microsoft.AspNetCore.Authorization;
 using System.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +28,7 @@ builder.Services.AddHttpClient("MercadoPagoHttpClient", client =>
 builder.Services.AddInjectionInfrastructure();
 builder.Services.AddInjectionApplication();
 builder.Services.AddAuthentication(configuration);
+builder.Services.AddSingleton<IAuthorizationMiddlewareResultHandler, CustomAuthorizationHandler>();
 
 builder.Services.AddControllers();
 

@@ -1,4 +1,4 @@
-﻿using MercadoPago.CheckoutAPI.Application.Models.Commons.Response;
+﻿using MercadoPago.CheckoutAPI.Application.Dtos.Commons.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,6 @@ namespace MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago
 {
     public interface IIdentificationTypesApplication
     {
-        Task<BaseResponse<HttpResponseMessage>> GetIdentificationTypes();
+        Task<BaseResponse<T>> GetIdentificationTypes<T>();
     }
 }

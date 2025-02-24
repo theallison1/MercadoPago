@@ -1,6 +1,6 @@
-﻿using MercadoPago.CheckoutAPI.Application.Dtos.Users.Request;
+﻿using MercadoPago.CheckoutAPI.Application.Dtos.Commons.Response;
+using MercadoPago.CheckoutAPI.Application.Dtos.Users.Request;
 using MercadoPago.CheckoutAPI.Application.Interfaces;
-using MercadoPago.CheckoutAPI.Application.Models.Commons.Response;
 using MercadoPago.CheckoutAPI.Application.Settings;
 using MercadoPago.CheckoutAPI.Domain.Entities;
 using MercadoPago.CheckoutAPI.Infrastructure.Persistences.Interfaces;
@@ -37,7 +37,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             {
                 if (EncryptSHA256(bodyRequest.Password) == user.Password)
                 {
-                    response.Content = GenerateToken(user);
+                    response.Data = GenerateToken(user);
                     response.Message = "Token generado correctamente";
                 }
                 else
@@ -84,13 +84,25 @@ namespace MercadoPago.CheckoutAPI.Application.Services
 
             var handler = new JwtSecurityTokenHandler();
 
-            var token = new JwtSecurityToken(
-                issuer: _jwtSettings.Value.Issuer,
-                audience: _jwtSettings.Value.Issuer,
-                claims: userClaims,
-                expires: DateTime.UtcNow.AddMinutes(_jwtSettings.Value.Expires),
-                notBefore: DateTime.UtcNow,
-                signingCredentials: credentials);
+            var securityTokenDescriptor = new SecurityTokenDescriptor()
+            {
+                Issuer = _jwtSettings.Value.Issuer,
+                Audience = _jwtSettings.Value.Issuer,
+                Subject = new ClaimsIdentity(userClaims),
+                Expires = DateTime.UtcNow.AddMinutes(_jwtSettings.Value.Expires),
+                NotBefore = DateTime.UtcNow,
+                SigningCredentials = credentials
+            };
+
+            var token = handler.CreateToken(securityTokenDescriptor);
+
+            //var token = new JwtSecurityToken(
+            //    issuer: _jwtSettings.Value.Issuer,
+            //    audience: _jwtSettings.Value.Issuer,
+            //    claims: userClaims,
+            //    expires: DateTime.UtcNow.AddMinutes(_jwtSettings.Value.Expires),
+            //    notBefore: DateTime.UtcNow,
+            //    signingCredentials: credentials);
 
             return handler.WriteToken(token);
         }
