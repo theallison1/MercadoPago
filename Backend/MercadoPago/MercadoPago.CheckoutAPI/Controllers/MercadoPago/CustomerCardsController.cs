@@ -1,6 +1,5 @@
 ﻿using MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago;
 using MercadoPago.CheckoutAPI.Application.Models.MercadoPago.CustomerCards.Request;
-using MercadoPago.CheckoutAPI.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,7 +22,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         {
             var response = await _customerCardsApplication.GetCustomerCards<object>(customerId);
 
-            return response.ReturnStatusCode(this);
+            return StatusCode(response.StatusCode, response);
         }
 
         [HttpGet("{customerId}/cards/{cardId}")]
@@ -31,7 +30,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         {
             var response = await _customerCardsApplication.GetCustomerCardById<object>(customerId, cardId);
 
-            return response.ReturnStatusCode(this);
+            return StatusCode(response.StatusCode, response);
         }
 
         [HttpPost("{customerId}/cards")]
@@ -39,7 +38,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         {
             var response = await _customerCardsApplication.CreateCustomerCard<object>(customerId, bodyRequest);
 
-            return response.ReturnStatusCode(this);
+            return StatusCode(response.StatusCode, response);
         }
 
         [HttpPut("{customerId}/cards/{cardId}")]
@@ -47,7 +46,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         {
             var response = await _customerCardsApplication.UpdateCustomerCard<object>(customerId, cardId, bodyRequest);
 
-            return response.ReturnStatusCode(this);
+            return StatusCode(response.StatusCode, response);
         }
 
         [HttpDelete("{customerId}/cards/{cardId}")]
@@ -55,7 +54,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         {
             var response = await _customerCardsApplication.DeleteCustomerCard<object>(customerId, cardId);
 
-            return response.ReturnStatusCode(this);
+            return StatusCode(response.StatusCode, response);
         }
     }
 }

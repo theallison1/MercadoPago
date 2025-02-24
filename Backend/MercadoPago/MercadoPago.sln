@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MercadoPago.CheckoutAPI.App
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MercadoPago.CheckoutAPI.Infrastructure", "MercadoPago.CheckoutAPI.Infrastructure\MercadoPago.CheckoutAPI.Infrastructure.csproj", "{99B00945-B237-4E71-8547-3DF8B3442377}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MercadoPago.CheckoutAPI.Domain", "MercadoPago.CheckoutAPI.Domain\MercadoPago.CheckoutAPI.Domain.csproj", "{8AA455B6-30F4-47E6-9212-B5C904AFB1FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MercadoPago.CheckoutAPI.Domain", "MercadoPago.CheckoutAPI.Domain\MercadoPago.CheckoutAPI.Domain.csproj", "{8AA455B6-30F4-47E6-9212-B5C904AFB1FF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MercadoPago.CheckoutAPI.Utilities", "MercadoPago.CheckoutAPI.Utilities\MercadoPago.CheckoutAPI.Utilities.csproj", "{B9951CB3-728F-43D4-AEE3-35D43259E5F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{8AA455B6-30F4-47E6-9212-B5C904AFB1FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AA455B6-30F4-47E6-9212-B5C904AFB1FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AA455B6-30F4-47E6-9212-B5C904AFB1FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9951CB3-728F-43D4-AEE3-35D43259E5F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9951CB3-728F-43D4-AEE3-35D43259E5F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9951CB3-728F-43D4-AEE3-35D43259E5F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9951CB3-728F-43D4-AEE3-35D43259E5F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{0744F14C-9F53-4A9C-B43B-1F05977303C2} = {D16ABC86-C048-42EA-8432-0915AF5AA9FD}
 		{99B00945-B237-4E71-8547-3DF8B3442377} = {D16ABC86-C048-42EA-8432-0915AF5AA9FD}
 		{8AA455B6-30F4-47E6-9212-B5C904AFB1FF} = {D16ABC86-C048-42EA-8432-0915AF5AA9FD}
+		{B9951CB3-728F-43D4-AEE3-35D43259E5F0} = {D16ABC86-C048-42EA-8432-0915AF5AA9FD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6A32BF58-78C0-47FC-9E63-5D5A4923C573}

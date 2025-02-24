@@ -1,6 +1,5 @@
 ﻿using MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago;
 using MercadoPago.CheckoutAPI.Application.Models.MercadoPago.Customers.Request;
-using MercadoPago.CheckoutAPI.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,7 +22,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         {
             var response = await _customersApplication.SearchCustomers<object>(filters);
 
-            return response.ReturnStatusCode(this);
+            return StatusCode(response.StatusCode, response);
         }
 
 
@@ -32,7 +31,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         {
             var response = await _customersApplication.GetCustomerById<object>(customerId);
 
-            return response.ReturnStatusCode(this);
+            return StatusCode(response.StatusCode, response);
         }
 
         [HttpPost]
@@ -40,7 +39,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         {
             var response = await _customersApplication.CreateCustomer<object>(bodyRequest);
 
-            return response.ReturnStatusCode(this);
+            return StatusCode(response.StatusCode, response);
         }
 
         [HttpPut("{customerId}")]
@@ -48,7 +47,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         {
             var response = await _customersApplication.UpdateCustomer<object>(customerId, bodyRequest);
 
-            return response.ReturnStatusCode(this);
+            return StatusCode(response.StatusCode, response);
         }
 
 

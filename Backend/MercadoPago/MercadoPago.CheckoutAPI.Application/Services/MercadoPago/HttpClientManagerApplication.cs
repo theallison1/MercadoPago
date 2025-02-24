@@ -2,10 +2,10 @@
 using MercadoPago.CheckoutAPI.Application.Interfaces;
 using MercadoPago.CheckoutAPI.Application.Serialization;
 using MercadoPago.CheckoutAPI.Application.Settings;
+using MercadoPago.CheckoutAPI.Utilities;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Net;
-using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 
@@ -92,8 +92,9 @@ namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
         {
             var response = new BaseResponse<T>();
 
-            response.Data = await _serializer.DeserializeJsonAsync<T>(httpResponse);
+            response.Message = ReplyMessages.SetStatusCodeMessage((int)httpResponse.StatusCode);
             response.StatusCode = (int)httpResponse.StatusCode;
+            response.Data = await _serializer.DeserializeJsonAsync<T>(httpResponse);
 
             return response;
         }

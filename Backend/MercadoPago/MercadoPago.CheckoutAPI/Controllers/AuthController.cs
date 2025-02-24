@@ -22,7 +22,7 @@ namespace MercadoPago.CheckoutAPI.Controllers
         {
             var response = await _authApplication.Login(bodyRequest);
 
-            return Ok(response);
+            return StatusCode(response.StatusCode, response);
         }
     }
 }

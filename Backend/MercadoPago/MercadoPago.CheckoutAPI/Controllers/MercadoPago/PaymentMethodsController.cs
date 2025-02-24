@@ -1,6 +1,5 @@
 ﻿using MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago;
 using MercadoPago.CheckoutAPI.Application.Models.MercadoPago.PaymentMethods.Request;
-using MercadoPago.CheckoutAPI.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,7 +22,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         {
             var response = await _paymentMethodsApplication.SearchPaymentMethods<object>(filters);
 
-            return response.ReturnStatusCode(this);
+            return StatusCode(response.StatusCode, response);
         }
 
         [HttpGet]
@@ -31,7 +30,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         {
             var response = await _paymentMethodsApplication.GetPaymentMethods<object>();
 
-            return response.ReturnStatusCode(this);
+            return StatusCode(response.StatusCode, response);
         }
     }
 }

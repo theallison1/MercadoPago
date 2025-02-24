@@ -24,7 +24,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, "card_tokens");
             _serializer.AddJsonBodyToContent(httpRequest, bodyRequest);
             var httpResponse = await _httpClientManagerApplication.SendWithRetryAsync(httpRequest);
-
+            
             var response = await _httpClientManagerApplication.SetBaseResponse<CardTokenResponse>(httpResponse);
             return response;
         }

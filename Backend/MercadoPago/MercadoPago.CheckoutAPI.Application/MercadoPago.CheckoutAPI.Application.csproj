@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.2" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.6.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.6.0" />
@@ -14,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MercadoPago.CheckoutAPI.Infrastructure\MercadoPago.CheckoutAPI.Infrastructure.csproj" />
+    <ProjectReference Include="..\MercadoPago.CheckoutAPI.Utilities\MercadoPago.CheckoutAPI.Utilities.csproj" />
   </ItemGroup>
 
 </Project>

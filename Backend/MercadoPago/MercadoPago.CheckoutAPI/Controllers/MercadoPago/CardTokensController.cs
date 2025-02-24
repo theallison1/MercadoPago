@@ -1,6 +1,5 @@
 ﻿using MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago;
 using MercadoPago.CheckoutAPI.Application.Models.MercadoPago.CardToken.Request;
-using MercadoPago.CheckoutAPI.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,7 +23,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         {
             var response = await _cardTokensApplication.CreateCardToken(bodyRequest);
 
-            return response.ReturnStatusCode(this);
+            return StatusCode(response.StatusCode, response);
         }
     }
 }

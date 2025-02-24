@@ -1,6 +1,5 @@
 ﻿using MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago;
 using MercadoPago.CheckoutAPI.Application.Models.MercadoPago.Users.Request;
-using MercadoPago.CheckoutAPI.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,7 +22,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         {
             var response = await _usersApplication.GetMyUser<object>();
 
-            return response.ReturnStatusCode(this);
+            return StatusCode(response.StatusCode, response);
         }
 
         [Authorize(Roles = "administrator")]
@@ -32,7 +31,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         {
             var response = await _usersApplication.CreateTestUser<object>(bodyRequest);
 
-            return response.ReturnStatusCode(this);
+            return StatusCode(response.StatusCode, response);
         }
     }
 }

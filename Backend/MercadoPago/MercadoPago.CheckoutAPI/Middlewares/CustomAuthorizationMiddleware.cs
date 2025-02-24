@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization.Policy;
+﻿using MercadoPago.CheckoutAPI.Application.Dtos.Commons.Response;
+using MercadoPago.CheckoutAPI.Utilities;
 using Microsoft.AspNetCore.Authorization;
-using MercadoPago.CheckoutAPI.Application.Dtos.Commons.Response;
-using Microsoft.AspNetCore.Http;
-using MercadoPago.CheckoutAPI.Helpers;
-using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization.Policy;
 
 namespace MercadoPago.CheckoutAPI.Middlewares
 {
@@ -16,7 +14,7 @@ namespace MercadoPago.CheckoutAPI.Middlewares
                 var response = new BaseResponse<object>();
                 var statusCode = authorizeResult.Challenged ? StatusCodes.Status401Unauthorized : StatusCodes.Status403Forbidden;
                 response.StatusCode = statusCode;
-                response.Message = StatusCodeHelper.SetResponseMessage(statusCode);
+                response.Message = ReplyMessages.SetStatusCodeMessage(statusCode);
                 context.Response.StatusCode = statusCode;
                 await context.Response.WriteAsJsonAsync(response);
                 return;

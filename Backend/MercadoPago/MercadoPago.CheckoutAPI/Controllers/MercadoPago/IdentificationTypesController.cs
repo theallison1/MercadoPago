@@ -1,7 +1,5 @@
 ﻿using MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago;
-using MercadoPago.CheckoutAPI.Helpers;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
@@ -22,7 +20,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         {
             var response = await _identificationTypesApplication.GetIdentificationTypes<object>();
 
-            return response.ReturnStatusCode(this);
+            return StatusCode(response.StatusCode, response);
         }
     }
 }
