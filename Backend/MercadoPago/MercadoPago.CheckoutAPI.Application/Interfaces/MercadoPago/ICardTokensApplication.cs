@@ -6,6 +6,6 @@ namespace MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago
 {
     public interface ICardTokensApplication
     {
-        Task<BaseResponse<CreateCardTokenResponse>> CreateCardToken(CreateCardTokenRequest bodyRequest);
+        Task<BaseResponse<CardTokenResponse>> CreateCardToken(CardTokenRequest bodyRequest);
     }
 }

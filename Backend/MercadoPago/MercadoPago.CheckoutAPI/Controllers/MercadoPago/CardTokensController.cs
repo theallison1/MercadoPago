@@ -20,7 +20,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
 
         // USAR ESTE ENDPOINT SOLAMENTE PARA PRUEBAS, POR SEGURIDAD EL TOKEN DEBE GENERARSE EN EL FRONTEND APUNTANDO DIRECTAMENTE HACIA LA API DE MERCADO PAGO
         [HttpPost]
-        public async Task<IActionResult> CreateCardToken([FromBody] CreateCardTokenRequest bodyRequest)
+        public async Task<IActionResult> CreateCardToken([FromBody] CardTokenRequest bodyRequest)
         {
             var response = await _cardTokensApplication.CreateCardToken(bodyRequest);
 

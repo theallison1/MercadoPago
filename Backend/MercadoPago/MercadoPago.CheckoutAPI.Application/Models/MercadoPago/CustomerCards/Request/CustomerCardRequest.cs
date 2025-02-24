@@ -5,7 +5,7 @@ namespace MercadoPago.CheckoutAPI.Application.Models.MercadoPago.CustomerCards.R
 {
     // Reference: https://www.mercadopago.com.ar/developers/es/reference/cards/_customers_customer_id_cards_id/put
 
-    public class UpdateCustomerCardRequest
+    public class CustomerCardRequest
     {
         [JsonPropertyName("token")]
         public string? Token { get; set; }

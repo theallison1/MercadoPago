@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace MercadoPago.CheckoutAPI.Application.Models.MercadoPago.CardToken.Request
 {
-    public class CreateCardTokenRequest
+    public class CardTokenRequest
     {
         [JsonPropertyName("card_number")]
         public string? CardNumber { get; set; }

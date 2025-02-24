@@ -35,7 +35,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         }
 
         [HttpPost("{customerId}/cards")]
-        public async Task<IActionResult> CreateCustomerCard(string customerId, [FromBody] CreateCustomerCardRequest bodyRequest)
+        public async Task<IActionResult> CreateCustomerCard(string customerId, [FromBody] CustomerCardRequest bodyRequest)
         {
             var response = await _customerCardsApplication.CreateCustomerCard<object>(customerId, bodyRequest);
 
@@ -43,7 +43,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         }
 
         [HttpPut("{customerId}/cards/{cardId}")]
-        public async Task<IActionResult> UpdateCustomerCard(string customerId, string cardId, [FromBody] UpdateCustomerCardRequest bodyRequest)
+        public async Task<IActionResult> UpdateCustomerCard(string customerId, string cardId, [FromBody] CustomerCardRequest bodyRequest)
         {
             var response = await _customerCardsApplication.UpdateCustomerCard<object>(customerId, cardId, bodyRequest);
 

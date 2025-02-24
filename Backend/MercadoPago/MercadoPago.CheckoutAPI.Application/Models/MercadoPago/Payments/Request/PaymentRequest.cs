@@ -5,7 +5,7 @@ namespace MercadoPago.CheckoutAPI.Application.Models.MercadoPago.Payments.Reques
 {
     // Reference: https://www.mercadopago.com.ar/developers/es/reference/payments/_payments/post
 
-    public class CreatePaymentRequest
+    public class PaymentRequest
     {
         [JsonPropertyName("binary_mode")]
         public bool? BinaryMode { get; set; }
@@ -21,6 +21,9 @@ namespace MercadoPago.CheckoutAPI.Application.Models.MercadoPago.Payments.Reques
 
         [JsonPropertyName("transaction_amount")]
         public float? TransactionAmount { get; set; }
+
+        [JsonPropertyName("status")]
+        public string? Status { get; set; }
 
         [JsonPropertyName("application_fee")]
         public float? ApplicationFee { get; set; }

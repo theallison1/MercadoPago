@@ -38,7 +38,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
 
         [Authorize(Roles = "administrator,customer")]
         [HttpPost]
-        public async Task<IActionResult> CreatePayment([FromBody] CreatePaymentRequest bodyRequest)
+        public async Task<IActionResult> CreatePayment([FromBody] PaymentRequest bodyRequest)
         {
             var response = await _paymentsApplication.CreatePayment<object>(bodyRequest);
 
@@ -47,7 +47,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
 
         [Authorize(Roles = "administrator")]
         [HttpPut("{paymentId}")]
-        public async Task<IActionResult> UpdatePayment(int paymentId, [FromBody] UpdatePaymentRequest bodyRequest)
+        public async Task<IActionResult> UpdatePayment(int paymentId, [FromBody] PaymentRequest bodyRequest)
         {
             var response = await _paymentsApplication.UpdatePayment<object>(paymentId, bodyRequest);
 

@@ -6,7 +6,7 @@ namespace MercadoPago.CheckoutAPI.Application.Models.MercadoPago.Customers.Reque
 {
     // Reference: https://www.mercadopago.com.ar/developers/es/reference/customers/_customers/post
 
-    public class CreateCustomerRequest
+    public class CustomerRequest
     {
         [JsonPropertyName("email")]
         public string? Email { get; set; }
