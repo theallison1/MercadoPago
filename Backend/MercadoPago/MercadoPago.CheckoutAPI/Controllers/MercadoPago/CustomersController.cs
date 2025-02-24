@@ -1,4 +1,4 @@
-﻿using MercadoPago.CheckoutAPI.Application.Interfaces;
+﻿using MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago;
 using MercadoPago.CheckoutAPI.Application.Models.Customers.Request;
 using MercadoPago.CheckoutAPI.Helpers;
 using Microsoft.AspNetCore.Authorization;

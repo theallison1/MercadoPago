@@ -1,4 +1,4 @@
-﻿using MercadoPago.CheckoutAPI.Application.Interfaces;
+﻿using MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago;
 using MercadoPago.CheckoutAPI.Application.Models.Users.Request;
 using MercadoPago.CheckoutAPI.Helpers;
 using Microsoft.AspNetCore.Authorization;
@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
 {
-    [Authorize(Roles = "administrator")]
+    [Authorize]
     [Route("api/MercadoPago/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -26,6 +26,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
             return response.ReturnStatusCode(this);
         }
 
+        [Authorize(Roles = "administrator")]
         [HttpPost("Test")]
         public async Task<IActionResult> CreateTestUser([FromBody] CreateTestUserRequest bodyRequest)
         {

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using MercadoPago.CheckoutAPI.Application.Models.Commons;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace MercadoPago.CheckoutAPI.Application.Models.CardToken.Request
 {

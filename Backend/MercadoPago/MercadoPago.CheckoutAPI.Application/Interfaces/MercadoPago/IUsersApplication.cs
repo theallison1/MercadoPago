@@ -1,7 +1,7 @@
 ﻿using MercadoPago.CheckoutAPI.Application.Models.Commons.Response;
 using MercadoPago.CheckoutAPI.Application.Models.Users.Request;
 
-namespace MercadoPago.CheckoutAPI.Application.Interfaces
+namespace MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago
 {
     public interface IUsersApplication
     {
