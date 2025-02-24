@@ -26,10 +26,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services
 
         public async Task<BaseResponse<string>> Login(TokenRequestDto bodyRequest)
         {
-            var response = new BaseResponse<string>()
-            {
-                Method = "POST"
-            };
+            var response = new BaseResponse<string>();
 
             var user = await _usersRepository.GetUserByEmail(bodyRequest.Email);
 

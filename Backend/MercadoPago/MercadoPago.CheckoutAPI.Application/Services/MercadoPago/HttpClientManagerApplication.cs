@@ -5,6 +5,7 @@ using MercadoPago.CheckoutAPI.Application.Settings;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Net;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 
@@ -21,49 +22,34 @@ namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
         public HttpClientManagerApplication(IHttpClientFactory httpClientFactory, ISerializer serializer, ILogger<HttpClientManagerApplication> logger, IOptions<MercadoPagoSettings> mercadoPagoSettings)
         {
             _httpClient = httpClientFactory.CreateClient("MercadoPagoHttpClient");
-            _serializer = serializer;
             _logger = logger;
+            _serializer = serializer;
             _maxRetries = Convert.ToInt32(mercadoPagoSettings.Value.MaxRetriesHTTP);
             _retryDelayMilliseconds = Convert.ToInt32(mercadoPagoSettings.Value.RetryDelayMilliseconds);
         }
 
-        public async Task<BaseResponse<T>> SendAsync<T>(HttpRequestMessage request)
+        public async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request)
         {
-            var response = new BaseResponse<T>()
-            {
-                Method = request.Method.Method
-            };
+            var httpResponseMessage = new HttpResponseMessage();
 
             try
             {
                 _logger.LogInformation("{TimeStamp} IN Request: {BaseAddress}{RequestUri}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), _httpClient.BaseAddress, request.RequestUri);
-                HttpResponseMessage httpResponseMessage = await _httpClient.SendAsync(request);
+                httpResponseMessage = await _httpClient.SendAsync(request);
                 _logger.LogInformation("{TimeStamp} OUT Request: {RequestUri}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), request.RequestUri);
-
-                response.Data = await _serializer.DeserializeJsonAsync<T>(httpResponseMessage);
-                response.StatusCode = (int)httpResponseMessage.StatusCode;
-
-                if (httpResponseMessage.IsSuccessStatusCode)
-                {
-                    return response;
-                }
             }
             catch (Exception ex)
             {
                 _logger.LogError("{TimeStamp} ERROR: {Exception}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ex);
-                response.Message = ex.Message;
             }
 
-            return response;
+            return httpResponseMessage;
         }
 
-        public async Task<BaseResponse<T>> SendWithRetryAsync<T>(HttpRequestMessage request)
+        public async Task<HttpResponseMessage> SendWithRetryAsync(HttpRequestMessage request)
         {
             int attempts = 0;
-            var response = new BaseResponse<T>()
-            {
-                Method = request.Method.Method
-            };
+            var httpResponseMessage = new HttpResponseMessage();
 
             while (attempts < _maxRetries)
             {
@@ -72,15 +58,12 @@ namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
                 {
                     HttpRequestMessage attemptRequest = await CloneRequestAsync(request);
                     _logger.LogInformation("{TimeStamp} IN Request: (Intento Nro {Attempts}): {BaseAddress}{RequestUri}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), attempts, _httpClient.BaseAddress, attemptRequest.RequestUri);
-                    HttpResponseMessage httpResponseMessage = await _httpClient.SendAsync(attemptRequest);
+                    httpResponseMessage = await _httpClient.SendAsync(attemptRequest);
                     _logger.LogInformation("{TimeStamp} OUT Request: (Intento Nro {Attempts}): {RequestUri}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), attempts, attemptRequest.RequestUri);
-
-                    response.Data = await _serializer.DeserializeJsonAsync<T>(httpResponseMessage);
-                    response.StatusCode = (int)httpResponseMessage.StatusCode;
 
                     if (httpResponseMessage.IsSuccessStatusCode)
                     {
-                        return response;
+                        return httpResponseMessage;
                     }
 
                     if (httpResponseMessage.StatusCode == HttpStatusCode.RequestTimeout || (int)httpResponseMessage.StatusCode >= 500)
@@ -99,12 +82,18 @@ namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
                     {
                         await Task.Delay(_retryDelayMilliseconds);
                     }
-                    else
-                    {
-                        response.Message = ex.Message;
-                    }
                 }
             }
+
+            return httpResponseMessage;
+        }
+
+        public async Task<BaseResponse<T>> SetBaseResponse<T>(HttpResponseMessage httpResponse)
+        {
+            var response = new BaseResponse<T>();
+
+            response.Data = await _serializer.DeserializeJsonAsync<T>(httpResponse);
+            response.StatusCode = (int)httpResponse.StatusCode;
 
             return response;
         }

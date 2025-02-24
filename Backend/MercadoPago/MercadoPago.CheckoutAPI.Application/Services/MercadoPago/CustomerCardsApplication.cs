@@ -19,50 +19,48 @@ namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
 
         public async Task<BaseResponse<T>> GetCustomerCards<T>(string customerId)
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, $"customers/{customerId}/cards");
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"customers/{customerId}/cards");
+            var httpResponse = await _httpClientManagerApplication.SendAsync(httpRequest);
 
-            var response = await _httpClientManagerApplication.SendAsync<T>(request);
-
+            var response = await _httpClientManagerApplication.SetBaseResponse<T>(httpResponse);
             return response;
         }
 
         public async Task<BaseResponse<T>> GetCustomerCardById<T>(string customerId, string cardId)
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, $"customers/{customerId}/cards/{cardId}");
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"customers/{customerId}/cards/{cardId}");
+            var httpResponse = await _httpClientManagerApplication.SendAsync(httpRequest);
 
-            var response = await _httpClientManagerApplication.SendAsync<T>(request);
-
+            var response = await _httpClientManagerApplication.SetBaseResponse<T>(httpResponse);
             return response;
         }
 
-        public async Task<BaseResponse<T>> CreateCustomerCard<T>(string customerId, CreateCustomerCardRequest bodyRequest)
+        public async Task<BaseResponse<T>> CreateCustomerCard<T>(string customerId, CustomerCardRequest bodyRequest)
         {
-            var request = new HttpRequestMessage(HttpMethod.Post, $"customers/{customerId}/cards");
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, $"customers/{customerId}/cards");
+            _serializer.AddJsonBodyToContent(httpRequest, bodyRequest);
+            var httpResponse = await _httpClientManagerApplication.SendWithRetryAsync(httpRequest);
 
-            _serializer.AddJsonBodyToContent(request, bodyRequest);
-
-            var response = await _httpClientManagerApplication.SendWithRetryAsync<T>(request);
-
+            var response = await _httpClientManagerApplication.SetBaseResponse<T>(httpResponse);
             return response;
         }
 
-        public async Task<BaseResponse<T>> UpdateCustomerCard<T>(string customerId, string cardId, UpdateCustomerCardRequest bodyRequest)
+        public async Task<BaseResponse<T>> UpdateCustomerCard<T>(string customerId, string cardId, CustomerCardRequest bodyRequest)
         {
-            var request = new HttpRequestMessage(HttpMethod.Put, $"customers/{customerId}/cards/{cardId}");
+            var httpRequest = new HttpRequestMessage(HttpMethod.Put, $"customers/{customerId}/cards/{cardId}");
+            _serializer.AddJsonBodyToContent(httpRequest, bodyRequest);
+            var httpResponse = await _httpClientManagerApplication.SendWithRetryAsync(httpRequest);
 
-            _serializer.AddJsonBodyToContent(request, bodyRequest);
-
-            var response = await _httpClientManagerApplication.SendWithRetryAsync<T>(request);
-
+            var response = await _httpClientManagerApplication.SetBaseResponse<T>(httpResponse);
             return response;
         }
 
         public async Task<BaseResponse<T>> DeleteCustomerCard<T>(string customerId, string cardId)
         {
-            var request = new HttpRequestMessage(HttpMethod.Delete, $"customers/{customerId}/cards/{cardId}");
+            var httpRequest = new HttpRequestMessage(HttpMethod.Delete, $"customers/{customerId}/cards/{cardId}");
+            var httpResponse = await _httpClientManagerApplication.SendWithRetryAsync(httpRequest);
 
-            var response = await _httpClientManagerApplication.SendWithRetryAsync<T>(request);
-
+            var response = await _httpClientManagerApplication.SetBaseResponse<T>(httpResponse);
             return response;
         }
     }

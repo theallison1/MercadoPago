@@ -22,21 +22,20 @@ namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
 
         public async Task<BaseResponse<T>> GetMyUser<T>()
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, "users/me");
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, "users/me");
+            var httpResponse = await _httpClientManagerApplication.SendAsync(httpRequest);
 
-            var response = await _httpClientManagerApplication.SendAsync<T>(request);
-
+            var response = await _httpClientManagerApplication.SetBaseResponse<T>(httpResponse);
             return response;
         }
 
         public async Task<BaseResponse<T>> CreateTestUser<T>(CreateTestUserRequest bodyRequest)
         {
-            var request = new HttpRequestMessage(HttpMethod.Post, "users/test");
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, "users/test");
+            _serializer.AddJsonBodyToContent(httpRequest, bodyRequest);
+            var httpResponse = await _httpClientManagerApplication.SendWithRetryAsync(httpRequest);
 
-            _serializer.AddJsonBodyToContent(request, bodyRequest);
-
-            var response = await _httpClientManagerApplication.SendWithRetryAsync<T>(request);
-
+            var response = await _httpClientManagerApplication.SetBaseResponse<T>(httpResponse);
             return response;
         }
     }

@@ -5,8 +5,9 @@ namespace MercadoPago.CheckoutAPI.Application.Interfaces
 {
     public interface IHttpClientManagerApplication
     {
-        Task<BaseResponse<T>> SendAsync<T>(HttpRequestMessage request);
-        Task<BaseResponse<T>> SendWithRetryAsync<T>(HttpRequestMessage request);
+        Task<HttpResponseMessage> SendAsync(HttpRequestMessage httpRequest);
+        Task<HttpResponseMessage> SendWithRetryAsync(HttpRequestMessage httpRequest);
+        Task<BaseResponse<T>> SetBaseResponse<T>(HttpResponseMessage httpResponse);
         HttpRequestHeaders AddXIdempotencyKey(HttpRequestHeaders headers);
         void RemoveVersionUrlBase();
     }
