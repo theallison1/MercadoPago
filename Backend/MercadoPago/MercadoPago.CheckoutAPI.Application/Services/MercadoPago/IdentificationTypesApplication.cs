@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MercadoPago.CheckoutAPI.Application.Services
+namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
 {
     public class IdentificationTypesApplication : IIdentificationTypesApplication
     {

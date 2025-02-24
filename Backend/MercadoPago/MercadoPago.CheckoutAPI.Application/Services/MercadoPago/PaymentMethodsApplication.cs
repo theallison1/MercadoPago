@@ -6,7 +6,7 @@ using MercadoPago.CheckoutAPI.Application.Serialization;
 using MercadoPago.CheckoutAPI.Application.Settings;
 using Microsoft.Extensions.Options;
 
-namespace MercadoPago.CheckoutAPI.Application.Services
+namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
 {
     public class PaymentMethodsApplication : IPaymentMethodsApplication
     {

@@ -4,7 +4,7 @@ using MercadoPago.CheckoutAPI.Application.Models.Commons.Response;
 using MercadoPago.CheckoutAPI.Application.Models.CustomerCards.Request;
 using MercadoPago.CheckoutAPI.Application.Serialization;
 
-namespace MercadoPago.CheckoutAPI.Application.Services
+namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
 {
     public class CustomerCardsApplication : ICustomerCardsApplication
     {

@@ -2,6 +2,7 @@
 using MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago;
 using MercadoPago.CheckoutAPI.Application.Serialization;
 using MercadoPago.CheckoutAPI.Application.Services;
+using MercadoPago.CheckoutAPI.Application.Services.MercadoPago;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MercadoPago.CheckoutAPI.Application.Extensions
