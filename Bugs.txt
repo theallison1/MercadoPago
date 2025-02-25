@@ -1,1 +1,2 @@
-- El endpoint de mercado https://api.mercadopago.com/v1/customers/(ID) no actualiza el "address", parece ser un error de ellos o la documentacion está mal.
+- El endpoint de mercado PUT https://api.mercadopago.com/v1/customers/(ID) no actualiza el "address", parece ser un error de ellos o la documentacion está mal.
+- Si se hace POST https://api.mercadopago.com/v1/customers/(ID)/cards sobre una tarjeta ya creada, el endpoint devuelve OK pero no hace nada.

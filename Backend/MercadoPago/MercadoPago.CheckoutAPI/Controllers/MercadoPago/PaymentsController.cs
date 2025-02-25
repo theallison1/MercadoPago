@@ -18,7 +18,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
 
         [Authorize(Roles = "administrator")]
         [HttpGet("Search")]
-        public async Task<IActionResult> SearchPayments([FromQuery] SearchPaymentsRequestFilters filters)
+        public async Task<IActionResult> SearchPayments([FromQuery] PaymentsRequestFilters filters)
         {
             var response = await _paymentsApplication.SearchPayments<object>(filters);
 

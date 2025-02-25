@@ -8,6 +8,9 @@ namespace MercadoPago.CheckoutAPI.Application.Models.MercadoPago.Customers
         [JsonPropertyName("id")]
         public string? Id { get; set; }
 
+        [JsonPropertyName("city")]
+        public City? City { get; set; }
+
         [JsonPropertyName("street_number")]
         public new long? StreetNumber
         {

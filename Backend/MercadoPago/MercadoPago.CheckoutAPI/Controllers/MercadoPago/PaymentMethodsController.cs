@@ -18,7 +18,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         }
 
         [HttpGet("Search")]
-        public async Task<IActionResult> SearchPaymentMethods([FromQuery] SearchPaymentMethodsRequestFilters filters)
+        public async Task<IActionResult> SearchPaymentMethods([FromQuery] PaymentMethodsRequestFilters filters)
         {
             var response = await _paymentMethodsApplication.SearchPaymentMethods<object>(filters);
 
@@ -29,6 +29,14 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         public async Task<IActionResult> GetPaymentMethods()
         {
             var response = await _paymentMethodsApplication.GetPaymentMethods<object>();
+
+            return StatusCode(response.StatusCode, response);
+        }
+
+        [HttpGet("Installments")]
+        public async Task<IActionResult> GetInstallments([FromQuery] PaymentMethodsRequestFilters filters)
+        {
+            var response = await _paymentMethodsApplication.GetInstallments<object>(filters);
 
             return StatusCode(response.StatusCode, response);
         }

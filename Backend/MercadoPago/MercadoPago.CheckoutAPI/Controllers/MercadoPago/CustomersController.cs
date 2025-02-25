@@ -18,7 +18,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         }
 
         [HttpGet("Search")]
-        public async Task<IActionResult> SearchCustomers([FromQuery] SearchCustomersRequestFilters filters)
+        public async Task<IActionResult> SearchCustomers([FromQuery] CustomersRequestFilters filters)
         {
             var response = await _customersApplication.SearchCustomers<object>(filters);
 

@@ -14,7 +14,7 @@ namespace MercadoPago.CheckoutAPI.Tests
             // Credit Cards
             new TestCard("Mastercard", "5031755734530604", "123", "11/30"),
             new TestCard("Visa", "4509953566233704", "123", "11/30"),
-            new TestCard("American Express", "371180303257522", "123", "11/30"),
+            new TestCard("American Express", "371180303257522", "1234", "11/30"),
 
             // Debit Cards
             new TestCard("Mastercard", "5287338310253304", "123", "11/30"),

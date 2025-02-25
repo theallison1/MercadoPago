@@ -5,7 +5,7 @@ namespace MercadoPago.CheckoutAPI.Application.Models.MercadoPago.Payments.Reques
 {
     // Reference: https://www.mercadopago.com.ar/developers/es/reference/payments/_payments_search/get
 
-    public class SearchPaymentsRequestFilters : SearchRequestFilters
+    public class PaymentsRequestFilters : RequestFilters
     {
         [JsonPropertyName("sort")]
         public string? Sort { get; set; }

@@ -21,7 +21,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
             _mercadoPagoSettings = mercadoPagoSettings;
         }
 
-        public async Task<BaseResponse<T>> SearchPaymentMethods<T>(SearchPaymentMethodsRequestFilters filters)
+        public async Task<BaseResponse<T>> SearchPaymentMethods<T>(PaymentMethodsRequestFilters filters)
         {
             filters.PublicKey = _mercadoPagoSettings.Value.PublicKey;
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"payment_methods/search{_serializer.SetQueryParams(filters)}");
@@ -34,6 +34,15 @@ namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
         public async Task<BaseResponse<T>> GetPaymentMethods<T>()
         {
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, "payment_methods");
+            var httpResponse = await _httpClientManagerApplication.SendAsync(httpRequest);
+
+            var response = await _httpClientManagerApplication.SetBaseResponse<T>(httpResponse);
+            return response;
+        }
+
+        public async Task<BaseResponse<T>> GetInstallments<T>(PaymentMethodsRequestFilters filters)
+        {
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"payment_methods/installments{_serializer.SetQueryParams(filters)}");
             var httpResponse = await _httpClientManagerApplication.SendAsync(httpRequest);
 
             var response = await _httpClientManagerApplication.SetBaseResponse<T>(httpResponse);

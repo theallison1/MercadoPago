@@ -17,7 +17,7 @@ namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
             _serializer = serializer;
         }
 
-        public async Task<BaseResponse<T>> SearchPayments<T>(SearchPaymentsRequestFilters filters)
+        public async Task<BaseResponse<T>> SearchPayments<T>(PaymentsRequestFilters filters)
         {
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"payments/search{_serializer.SetQueryParams(filters)}");
             var httpResponse = await _httpClientManagerApplication.SendAsync(httpRequest);

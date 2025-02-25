@@ -2,7 +2,7 @@
 
 namespace MercadoPago.CheckoutAPI.Application.Models.MercadoPago.Commons.Request
 {
-    public class SearchRequestFilters
+    public class RequestFilters
     {
         [JsonPropertyName("limit")]
         public int? Limit { get; set; }

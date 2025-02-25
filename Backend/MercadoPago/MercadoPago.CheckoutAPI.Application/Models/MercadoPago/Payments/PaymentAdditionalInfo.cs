@@ -12,5 +12,8 @@ namespace MercadoPago.CheckoutAPI.Application.Models.MercadoPago.Payments
 
         [JsonPropertyName("payer")]
         public PaymentAdditionalInfoPayer? Payer { get; set; }
+
+        [JsonPropertyName("shipments")]
+        public PaymentAdditionalInfoShipment? Shipments { get; set; }
     }
 }
