@@ -1,0 +1,1110 @@
+{
+	"info": {
+		"_postman_id": "23c50515-6631-422e-be77-613bb795352d",
+		"name": "Local CheckoutAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23719889"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "/Auth (administrator)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(pm.response.text())\r",
+									"pm.environment.set(\"JwtToken\", jsonData[\"data\"])"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test@admin.com.ar\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/Auth",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"Auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/Auth (customer)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(pm.response.text())\r",
+									"pm.environment.set(\"JwtToken\", jsonData[\"data\"])"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test@customer.com.ar\",\r\n    \"password\": \"4321\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/Auth",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"Auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MercadoPago",
+			"item": [
+				{
+					"name": "CardTokens",
+					"item": [
+						{
+							"name": "/CardTokens (VISA CREDITO)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(pm.response.text())\r",
+											"pm.environment.set(\"CardToken\", jsonData[\"data\"][\"id\"])\r",
+											"pm.environment.set(\"CardBin\", jsonData[\"data\"][\"first_six_digits\"]);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"card_number\": \"4509953566233704\",\r\n    \"cardholder\": {\r\n        \"name\": \"APRO\",\r\n        \"identification\": {\r\n            \"type\": \"DNI\",\r\n            \"number\": \"12345678\"\r\n        }\r\n    },\r\n    \"security_code\": \"123\",\r\n    \"expiration_month\": \"11\",\r\n    \"expiration_year\": \"2030\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/MercadoPago/CardTokens",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"CardTokens"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/CardTokens (MASTERCARD CREDITO)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(pm.response.text())\r",
+											"pm.environment.set(\"CardToken\", jsonData[\"data\"][\"id\"])\r",
+											"pm.environment.set(\"CardBin\", jsonData[\"data\"][\"first_six_digits\"]);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"card_number\": \"5031755734530604\",\r\n    \"cardholder\": {\r\n        \"name\": \"APRO\",\r\n        \"identification\": {\r\n            \"type\": \"DNI\",\r\n            \"number\": \"12345678\"\r\n        }\r\n    },\r\n    \"security_code\": \"123\",\r\n    \"expiration_month\": \"11\",\r\n    \"expiration_year\": \"2030\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/MercadoPago/CardTokens",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"CardTokens"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/CardTokens (VISA DEBITO)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(pm.response.text())\r",
+											"pm.environment.set(\"CardToken\", jsonData[\"data\"][\"id\"])\r",
+											"pm.environment.set(\"CardBin\", jsonData[\"data\"][\"first_six_digits\"]);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"card_number\": \"4002768694395619\",\r\n    \"cardholder\": {\r\n        \"name\": \"APRO\",\r\n        \"identification\": {\r\n            \"type\": \"DNI\",\r\n            \"number\": \"12345678\"\r\n        }\r\n    },\r\n    \"security_code\": \"123\",\r\n    \"expiration_month\": \"11\",\r\n    \"expiration_year\": \"2030\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/MercadoPago/CardTokens",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"CardTokens"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/CardTokens (MASTERCARD DEBITO)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(pm.response.text())\r",
+											"pm.environment.set(\"CardToken\", jsonData[\"data\"][\"id\"])\r",
+											"pm.environment.set(\"CardBin\", jsonData[\"data\"][\"first_six_digits\"]);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"card_number\": \"5287338310253304\",\r\n    \"cardholder\": {\r\n        \"name\": \"APRO\",\r\n        \"identification\": {\r\n            \"type\": \"DNI\",\r\n            \"number\": \"12345678\"\r\n        }\r\n    },\r\n    \"security_code\": \"123\",\r\n    \"expiration_month\": \"11\",\r\n    \"expiration_year\": \"2030\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/MercadoPago/CardTokens",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"CardTokens"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CustomerCards",
+					"item": [
+						{
+							"name": "/CustomerCards/{{CustomerID}}/Cards",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/MercadoPago/CustomerCards/{{CustomerID}}/Cards",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"CustomerCards",
+										"{{CustomerID}}",
+										"Cards"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/CustomerCards/{{CustomerID}}/Cards/{{CardID}}",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/MercadoPago/CustomerCards/{{CustomerID}}/Cards/{{CardID}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"CustomerCards",
+										"{{CustomerID}}",
+										"Cards",
+										"{{CardID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/CustomerCards/{{CustomerID}}/Cards",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(pm.response.text())\r",
+											"pm.environment.set(\"CardID\", jsonData[\"data\"][\"id\"])"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"token\": \"{{CardToken}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/MercadoPago/CustomerCards/{{CustomerID}}/Cards",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"CustomerCards",
+										"{{CustomerID}}",
+										"Cards"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/CustomerCards/{{CustomerID}}/Cards/{{CardID}}",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cardholder\": {\r\n        \"name\": \"CONT\",\r\n        \"identification\": {\r\n            \"number\": \"12123123\",\r\n            \"type\": \"DNI\"\r\n        }\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/MercadoPago/CustomerCards/{{CustomerID}}/Cards/{{CardID}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"CustomerCards",
+										"{{CustomerID}}",
+										"Cards",
+										"{{CardID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/CustomerCards/{{CustomerID}}/Cards/{{CardID}}",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/MercadoPago/CustomerCards/{{CustomerID}}/Cards/{{CardID}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"CustomerCards",
+										"{{CustomerID}}",
+										"Cards",
+										"{{CardID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Customers",
+					"item": [
+						{
+							"name": "/Customers/Search",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/MercadoPago/Customers/Search?limit=100&offset=0",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"Customers",
+										"Search"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "100"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/Customers/{{CustomerID}}",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/MercadoPago/Customers/{{CustomerID}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"Customers",
+										"{{CustomerID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/Customers/{{CustomerID}}",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"first_name\": \"Nombre\",\r\n    \"last_name\": \"Actualizado\",\r\n    \"phone\": {\r\n        \"area_code\": \"02320\",\r\n        \"number\": \"519842387\"\r\n    },\r\n    \"identification\": {\r\n        \"type\": \"CUIT\",\r\n        \"number\": \"20111111112\"\r\n    },\r\n    \"default_address\": \"Home\",\r\n    \"address\": {\r\n        \"id\": \"Home\",\r\n        \"zip_code\": \"1200\",\r\n        \"street_name\": \"Av. 9 de Julio\",\r\n        \"street_number\": 1800\r\n    },\r\n    \"date_registered\": \"2025-02-24\",\r\n    \"description\": \"Prueba actualizacion customer\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/MercadoPago/Customers/{{CustomerID}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"Customers",
+										"{{CustomerID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/Customers",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(pm.response.text())\r",
+											"pm.environment.set(\"CustomerID\", jsonData[\"data\"][\"id\"])"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"sarasa@testusr.com\",\r\n    \"first_name\": \"Test\",\r\n    \"last_name\": \"User\",\r\n    \"phone\": {\r\n        \"area_code\": \"11\",\r\n        \"number\": \"987654321\"\r\n    },\r\n    \"identification\": {\r\n        \"type\": \"DNI\",\r\n        \"number\": \"12123123\"\r\n    },\r\n    \"default_address\": \"Home\",\r\n    \"address\": {\r\n        \"id\": \"Home\",\r\n        \"zip_code\": \"1406\",\r\n        \"street_name\": \"Av. 9 de Julio\",\r\n        \"street_number\": 1500,\r\n        \"city\": {\r\n            \"name\": \"Buenos Aires\"\r\n        }\r\n    },\r\n    \"date_registered\": \"2000-01-18\",\r\n    \"description\": \"Description del user\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/MercadoPago/Customers",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"Customers"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "IdentificationTypes",
+					"item": [
+						{
+							"name": "/IdentificationTypes",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/MercadoPago/IdentificationTypes",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"IdentificationTypes"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PaymentMethods",
+					"item": [
+						{
+							"name": "/PaymentMethods/Search",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"PaymentMethodID\", jsonData[\"data\"][\"results\"][0][\"id\"]);\r",
+											"postman.setEnvironmentVariable(\"PaymentTypeID\", jsonData[\"data\"][\"results\"][0][\"payment_type_id\"]);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/MercadoPago/PaymentMethods/Search?limit=100&offset=0&Bins={{CardBin}}&SiteID=MLA&Marketplace=NONE",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"PaymentMethods",
+										"Search"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "100"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										},
+										{
+											"key": "Bins",
+											"value": "{{CardBin}}"
+										},
+										{
+											"key": "SiteID",
+											"value": "MLA"
+										},
+										{
+											"key": "Marketplace",
+											"value": "NONE"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/PaymentMethods/Installments",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/MercadoPago/PaymentMethods/Installments?bin={{CardBin}}&amount=100",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"PaymentMethods",
+										"Installments"
+									],
+									"query": [
+										{
+											"key": "bin",
+											"value": "{{CardBin}}"
+										},
+										{
+											"key": "amount",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/PaymentMethods",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/MercadoPago/PaymentMethods",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"PaymentMethods"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Payments",
+					"item": [
+						{
+							"name": "/Payments/Search",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/MercadoPago/Payments/Search?limit=100&offset=0",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"Payments",
+										"Search"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "100"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/Payments/{{PaymentID}}",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/MercadoPago/Payments/{{PaymentID}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"Payments",
+										"{{PaymentID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/Payments/{{PaymentID}} (Cancelar pago)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"cancelled\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/MercadoPago/Payments/{{PaymentID}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"Payments",
+										"{{PaymentID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/Payments/{{PaymentID}} (Capturar pago)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"capture\": true // https://www.mercadopago.com.ar/developers/es/reference/payments/_payments_id/put\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/MercadoPago/Payments/{{PaymentID}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"Payments",
+										"{{PaymentID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/Payments",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(pm.response.text())\r",
+											"pm.environment.set(\"PaymentID\", jsonData[\"data\"][\"id\"])"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"transaction_amount\": 12.34,\r\n    \"installments\": 1,\r\n    \"statement_descriptor\": \"SARASA\",\r\n    \"capture\": true,\r\n    \"binary_mode\": false,\r\n    \"sponsor_id\": null,\r\n    \"application_fee\": null,\r\n    \"payment_method_id\": \"{{PaymentMethodID}}\",\r\n    \"token\": \"{{CardToken}}\",\r\n    \"external_reference\": \"{{$timestamp}}\",\r\n    \"notification_url\": \"http://www.notification-url.com\",\r\n    \"metadata\": {\r\n        \"order_number\": \"order_{{$timestamp}}\"\r\n    },\r\n    \"description\": \"PEDIDO NUEVO\",\r\n    \"payer\": {\r\n        \"first_name\": \"Nombre Prueba\",\r\n        \"last_name\": \"Apellido Prueba\",\r\n        \"email\": \"testuser@mail.com\",\r\n        \"identification\": {\r\n            \"type\": \"DNI\",\r\n            \"number\": \"12345678\"\r\n        }\r\n    },\r\n    \"additional_info\": {\r\n        \"items\": [\r\n            {\r\n                \"id\": \"1941\",\r\n                \"title\": \"Ingreso Anticipado\",\r\n                \"description\": \"Natal Iluminado 2019\",\r\n                \"picture_url\": null,\r\n                \"category_id\": \"Tickets\",\r\n                \"quantity\": 1,\r\n                \"unit_price\": 100.00,\r\n                \"event_date\": \"2019-12-25T19:30:00.000-03:00\"\r\n            }\r\n        ],\r\n        \"payer\": {\r\n            \"first_name\": \"Nombre Prueba\",\r\n            \"last_name\": \"Apellido Prueba\",\r\n            \"is_prime_user\": \"1\",\r\n            \"is_first_purchase_online\": \"1\",\r\n            \"last_purchase\": \"2019-10-25T19:30:00.000-03:00\",\r\n            \"phone\": {\r\n                \"area_code\": \"11\",\r\n                \"number\": \"987654321\"\r\n            },\r\n            \"address\": {\r\n                \"zip_code\": \"1614\",\r\n                \"street_name\": \"CalleFalsa\",\r\n                \"street_number\": \"123\"\r\n            },\r\n            \"registration_date\": \"2013-08-06T09:25:04.000-03:00\"\r\n        },\r\n        \"shipments\": {\r\n            \"express_shipment\": \"0\",\r\n            \"pick_up_on_seller\": \"1\",\r\n            \"receiver_address\": {\r\n                \"zip_code\": \"1617\",\r\n                \"street_name\": \"San Luis\",\r\n                \"street_number\": \"15\",\r\n                \"floor\": \"\",\r\n                \"apartment\": \"\"\r\n            }\r\n        }\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/MercadoPago/Payments",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"Payments"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "/Users/Me",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/MercadoPago/Users/Me",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"Users",
+										"Me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/Users/Test",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{JwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"site_id\": \"MLA\",\r\n    \"description\": \"test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/MercadoPago/Users/Test",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"MercadoPago",
+										"Users",
+										"Test"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

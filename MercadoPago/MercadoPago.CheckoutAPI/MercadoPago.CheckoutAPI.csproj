@@ -14,4 +14,17 @@
     <ProjectReference Include="..\MercadoPago.CheckoutAPI.Application\MercadoPago.CheckoutAPI.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Postman\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Postman\Local CheckoutAPI.postman_collection.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Postman\Local CheckoutAPI.postman_environment.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
