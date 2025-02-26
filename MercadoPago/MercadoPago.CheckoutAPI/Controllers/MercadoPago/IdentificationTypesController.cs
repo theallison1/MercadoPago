@@ -18,7 +18,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpGet]
         public async Task<IActionResult> GetIdentificationTypes()
         {
-            var response = await _identificationTypesApplication.GetIdentificationTypes<object>();
+            var response = await _identificationTypesApplication.GetIdentificationTypes();
 
             return StatusCode(response.StatusCode, response);
         }

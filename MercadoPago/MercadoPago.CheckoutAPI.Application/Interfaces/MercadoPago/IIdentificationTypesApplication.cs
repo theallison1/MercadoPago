@@ -9,6 +9,6 @@ namespace MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago
 {
     public interface IIdentificationTypesApplication
     {
-        Task<BaseResponse<T>> GetIdentificationTypes<T>();
+        Task<BaseResponse<object>> GetIdentificationTypes();
     }
 }

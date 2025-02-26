@@ -5,9 +5,9 @@ namespace MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago
 {
     public interface IPaymentsApplication
     {
-        Task<BaseResponse<T>> SearchPayments<T>(PaymentsRequestFilters filters);
-        Task<BaseResponse<T>> GetPaymentById<T>(int paymentId);
-        Task<BaseResponse<T>> CreatePayment<T>(PaymentRequest bodyRequest);
-        Task<BaseResponse<T>> UpdatePayment<T>(int paymentId, PaymentRequest bodyRequest);
+        Task<BaseResponse<object>> SearchPayments(PaymentsRequestFilters filters);
+        Task<BaseResponse<object>> GetPaymentById(int paymentId);
+        Task<BaseResponse<object>> CreatePayment(PaymentRequest bodyRequest);
+        Task<BaseResponse<object>> UpdatePayment(int paymentId, PaymentRequest bodyRequest);
     }
 }

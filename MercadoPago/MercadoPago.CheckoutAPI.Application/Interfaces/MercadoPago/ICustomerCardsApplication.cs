@@ -5,10 +5,10 @@ namespace MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago
 {
     public interface ICustomerCardsApplication
     {
-        Task<BaseResponse<T>> GetCustomerCards<T>(string customerId);
-        Task<BaseResponse<T>> GetCustomerCardById<T>(string customerId, string cardId);
-        Task<BaseResponse<T>> CreateCustomerCard<T>(string customerId, CustomerCardRequest bodyRequest);
-        Task<BaseResponse<T>> UpdateCustomerCard<T>(string customerId, string cardId, CustomerCardRequest bodyRequest);
-        Task<BaseResponse<T>> DeleteCustomerCard<T>(string customerId, string cardId);
+        Task<BaseResponse<object>> GetCustomerCards(string customerId);
+        Task<BaseResponse<object>> GetCustomerCardById(string customerId, string cardId);
+        Task<BaseResponse<object>> CreateCustomerCard(string customerId, CustomerCardRequest bodyRequest);
+        Task<BaseResponse<object>> UpdateCustomerCard(string customerId, string cardId, CustomerCardRequest bodyRequest);
+        Task<BaseResponse<object>> DeleteCustomerCard(string customerId, string cardId);
     }
 }

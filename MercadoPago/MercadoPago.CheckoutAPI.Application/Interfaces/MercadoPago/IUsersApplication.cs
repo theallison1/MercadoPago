@@ -5,7 +5,7 @@ namespace MercadoPago.CheckoutAPI.Application.Interfaces.MercadoPago
 {
     public interface IUsersApplication
     {
-        Task<BaseResponse<T>> GetMyUser<T>();
-        Task<BaseResponse<T>> CreateTestUser<T>(CreateTestUserRequest bodyRequest);
+        Task<BaseResponse<object>> GetMyUser();
+        Task<BaseResponse<object>> CreateTestUser(CreateTestUserRequest bodyRequest);
     }
 }

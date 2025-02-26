@@ -21,31 +21,31 @@ namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
             _mercadoPagoSettings = mercadoPagoSettings;
         }
 
-        public async Task<BaseResponse<T>> SearchPaymentMethods<T>(PaymentMethodsRequestFilters filters)
+        public async Task<BaseResponse<object>> SearchPaymentMethods(PaymentMethodsRequestFilters filters)
         {
             filters.PublicKey = _mercadoPagoSettings.Value.PublicKey;
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"payment_methods/search{_serializer.SetQueryParams(filters)}");
             var httpResponse = await _httpClientManagerApplication.SendAsync(httpRequest);
 
-            var response = await _httpClientManagerApplication.SetBaseResponse<T>(httpResponse);
+            var response = await _httpClientManagerApplication.SetBaseResponse<object>(httpResponse);
             return response;
         }
 
-        public async Task<BaseResponse<T>> GetPaymentMethods<T>()
+        public async Task<BaseResponse<object>> GetPaymentMethods()
         {
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, "payment_methods");
             var httpResponse = await _httpClientManagerApplication.SendAsync(httpRequest);
 
-            var response = await _httpClientManagerApplication.SetBaseResponse<T>(httpResponse);
+            var response = await _httpClientManagerApplication.SetBaseResponse<object>(httpResponse);
             return response;
         }
 
-        public async Task<BaseResponse<T>> GetInstallments<T>(PaymentMethodsRequestFilters filters)
+        public async Task<BaseResponse<object>> GetInstallments(PaymentMethodsRequestFilters filters)
         {
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"payment_methods/installments{_serializer.SetQueryParams(filters)}");
             var httpResponse = await _httpClientManagerApplication.SendAsync(httpRequest);
 
-            var response = await _httpClientManagerApplication.SetBaseResponse<T>(httpResponse);
+            var response = await _httpClientManagerApplication.SetBaseResponse<object>(httpResponse);
             return response;
         }
     }

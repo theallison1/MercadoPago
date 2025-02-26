@@ -20,7 +20,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpGet("Search")]
         public async Task<IActionResult> SearchPayments([FromQuery] PaymentsRequestFilters filters)
         {
-            var response = await _paymentsApplication.SearchPayments<object>(filters);
+            var response = await _paymentsApplication.SearchPayments(filters);
 
             return StatusCode(response.StatusCode, response);
         }
@@ -29,7 +29,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpGet("{paymentId}")]
         public async Task<IActionResult> GetPaymentById(int paymentId)
         {
-            var response = await _paymentsApplication.GetPaymentById<object>(paymentId);
+            var response = await _paymentsApplication.GetPaymentById(paymentId);
 
             return StatusCode(response.StatusCode, response);
         }
@@ -39,7 +39,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpPost]
         public async Task<IActionResult> CreatePayment([FromBody] PaymentRequest bodyRequest)
         {
-            var response = await _paymentsApplication.CreatePayment<object>(bodyRequest);
+            var response = await _paymentsApplication.CreatePayment(bodyRequest);
 
             return StatusCode(response.StatusCode, response);
         }
@@ -48,7 +48,7 @@ namespace MercadoPago.CheckoutAPI.Controllers.MercadoPago
         [HttpPut("{paymentId}")]
         public async Task<IActionResult> UpdatePayment(int paymentId, [FromBody] PaymentRequest bodyRequest)
         {
-            var response = await _paymentsApplication.UpdatePayment<object>(paymentId, bodyRequest);
+            var response = await _paymentsApplication.UpdatePayment(paymentId, bodyRequest);
 
             return StatusCode(response.StatusCode, response);
         }

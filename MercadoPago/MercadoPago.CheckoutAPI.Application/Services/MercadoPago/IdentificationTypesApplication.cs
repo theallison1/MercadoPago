@@ -18,12 +18,12 @@ namespace MercadoPago.CheckoutAPI.Application.Services.MercadoPago
             _httpClientManagerApplication = httpClientManagerApplication;
         }
 
-        public async Task<BaseResponse<T>> GetIdentificationTypes<T>()
+        public async Task<BaseResponse<object>> GetIdentificationTypes()
         {
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, "identification_types");
             var httpResponse = await _httpClientManagerApplication.SendAsync(httpRequest);
 
-            var response = await _httpClientManagerApplication.SetBaseResponse<T>(httpResponse);
+            var response = await _httpClientManagerApplication.SetBaseResponse<object>(httpResponse);
             return response;
         }
     }
