@@ -4,6 +4,9 @@ namespace MercadoPago.CheckoutAPI.Utilities
 {
     public static class ReplyMessages
     {
+        public const string TokenGeneratedSuccessfully = "Token generado correctamente";
+        public const string InvalidUserPassword = "Usuario y/o contraseña invalidos";
+
         public static string SetStatusCodeMessage(int statusCode)
         {
             string message = statusCode switch

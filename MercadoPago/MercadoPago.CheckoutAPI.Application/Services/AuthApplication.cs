@@ -4,6 +4,7 @@ using MercadoPago.CheckoutAPI.Application.Interfaces;
 using MercadoPago.CheckoutAPI.Application.Settings;
 using MercadoPago.CheckoutAPI.Domain.Entities;
 using MercadoPago.CheckoutAPI.Infrastructure.Persistences.Interfaces;
+using MercadoPago.CheckoutAPI.Utilities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -34,12 +35,12 @@ namespace MercadoPago.CheckoutAPI.Application.Services
             if (user is not null && !string.IsNullOrWhiteSpace(bodyRequest.Password) && (EncryptSHA256(bodyRequest.Password) == user.Password))
             {
                 response.Data = GenerateToken(user);
-                response.Message = "Token generado correctamente";
+                response.Message = ReplyMessages.TokenGeneratedSuccessfully;
                 response.StatusCode = StatusCodes.Status200OK;
             }
             else
             {
-                response.Message = "Usuario y/o contraseña invalidos";
+                response.Message = ReplyMessages.InvalidUserPassword;
                 response.StatusCode = StatusCodes.Status400BadRequest;
             }
 
