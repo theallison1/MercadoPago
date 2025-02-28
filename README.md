@@ -53,4 +53,5 @@ Configuracion para generar el Json Web Token:
 ## 📄 Referencias
 - [Mercado Pago - CheckoutAPI](https://www.mercadopago.com.ar/developers/es/docs/checkout-api/landing)
 - [Mercado Pago - API Reference](https://www.mercadopago.com.ar/developers/es/reference)
-
+####hay algunos cambios de configuraciones y errores de sintaxis .
+####preprando una nueva feature para explicar el despligue y paso a PRODUCCION.
